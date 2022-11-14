@@ -17,8 +17,10 @@ const login =(data)=>{
         type: types.login,
         payload:{
             id:'abc',
+            role: data.role,
             name: data.email,
             password:data.password
+
         }
     }
 

@@ -34,25 +34,32 @@ const theme = createTheme();
 
 export default function SignInSide() {
  const {login} = React.useContext(AuthContext);
- const { register, handleSubmit, watch, formState: { errors } } = useForm();
+ const { register, handleSubmit, watch, formState: { errors },reset } = useForm();
  const navegate = useNavigate();
- 
+
 const onSubmit=(data)=>{
   console.log('Dataform')
   console.log(data)
 
   if(data.email === "ezequielferreras2@gmail.com" && data.password ==="Kiyomaru.12078")
   {
+    data.role ="Administrator"
     login(data)
     navegate('/')
   }
   else{
+
+
+
     Swal.fire({
+      position: 'top-end',
       icon: 'error',
-      title: 'Error',
-      text: 'Usuario o constrasena Erronea',
-    
+      title: 'Usuario o constrasena Erronea',
+      showConfirmButton: false,
+      timer: 1500
     })
+
+    reset();
     
   }
   
