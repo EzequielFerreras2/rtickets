@@ -12,6 +12,10 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { AuthContext } from '../../../Context/AuthContext/AuthContext';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2'
 
 function Copyright(props) {
   return (
@@ -29,14 +33,31 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignInSide() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+ const {login} = React.useContext(AuthContext);
+ const { register, handleSubmit, watch, formState: { errors } } = useForm();
+ const navegate = useNavigate();
+ 
+const onSubmit=(data)=>{
+  console.log('Dataform')
+  console.log(data)
+
+  if(data.email === "ezequielferreras2@gmail.com" && data.password ==="Kiyomaru.12078")
+  {
+    login(data)
+    navegate('/')
+  }
+  else{
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Usuario o constrasena Erronea',
+    
+    })
+    
+  }
+  
+};
+  
 
   return (
     <ThemeProvider theme={theme}>
@@ -72,39 +93,46 @@ export default function SignInSide() {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                autoFocus
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-              />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Sign In
-              </Button>
+            
+            <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate  sx={{ mt: 1 }}>
+
+            
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="email"
+                    {...register("email")}
+                    label="Email Address"
+                    name="email" 
+                    autoComplete="email"
+                    autoFocus
+                  />
+                  <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    {...register("password")}
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                  />
+                  <FormControlLabel
+                    control={<Checkbox value="remember" color="primary" />}
+                    label="Remember me"
+                  />
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{ mt: 3, mb: 2 }}
+                  >
+                    Sign In
+                  </Button>
+            
+
               <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">
@@ -118,7 +146,9 @@ export default function SignInSide() {
                 </Grid>
               </Grid>
               <Copyright sx={{ mt: 5 }} />
+              
             </Box>
+            
           </Box>
         </Grid>
       </Grid>
