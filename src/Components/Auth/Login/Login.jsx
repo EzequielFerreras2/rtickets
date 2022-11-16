@@ -56,7 +56,7 @@ const onSubmit=(data)=>{
       icon: 'error',
       title: 'Usuario o constrasena Erronea',
       showConfirmButton: false,
-      timer: 1500
+      timer: 2000
     })
 
     reset();

@@ -6,10 +6,13 @@ import { authReducer } from './authReducer';
 const initialState ={
     logged:false,
 }
+const init =() =>{
+    const user =JSON.parse(localStorage.getItem('user')) ;
+}
 
 const AtuhProvider = ({children}) => {
 
-const[ authState,dispatch ]= useReducer(authReducer,initialState);
+const[ authState,dispatch ]= useReducer(authReducer,initialState, init);
 
 const login =(data)=>{
 
