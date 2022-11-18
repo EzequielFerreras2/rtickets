@@ -36,6 +36,7 @@ export default function SignInSide() {
  const {login} = React.useContext(AuthContext);
  const { register, handleSubmit, watch, formState: { errors },reset } = useForm();
  const navegate = useNavigate();
+ const user= JSON.parse(localStorage.getItem('user'));
 
 const onSubmit=(data)=>{
   console.log('Dataform')
@@ -46,6 +47,7 @@ const onSubmit=(data)=>{
     data.role ="Administrator"
     login(data)
     navegate('/')
+    
   }
   else{
 
@@ -64,6 +66,10 @@ const onSubmit=(data)=>{
   }
   
 };
+
+React.useEffect(() => {
+  console.log('User: '+ user)
+}, [user]);
   
 
   return (

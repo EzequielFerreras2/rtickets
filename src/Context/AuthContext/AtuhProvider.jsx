@@ -1,31 +1,41 @@
+import { ConstructionOutlined } from '@mui/icons-material';
 import React, { useReducer } from 'react';
 import { types } from '../Types/types';
 import { AuthContext } from './AuthContext';
 import { authReducer } from './authReducer';
 
-const initialState ={
-    logged:false,
-}
+
 const init =() =>{
     const user =JSON.parse(localStorage.getItem('user')) ;
+
+    return{
+        logged: !!user,
+        user
+    }
 }
 
 const AtuhProvider = ({children}) => {
 
-const[ authState,dispatch ]= useReducer(authReducer,initialState, init);
+const[ authState,dispatch ]= useReducer(authReducer,{}, init);
 
 const login =(data)=>{
+    const user ={
+
+        id:'abc',
+        role: data.role,
+        name: data.email,
+        password:data.password
+
+    }
 
     const action={
         type: types.login,
         payload:{
-            id:'abc',
-            role: data.role,
-            name: data.email,
-            password:data.password
-
+          user
         }
     }
+
+    localStorage.setItem('user', JSON.stringify(user));
 
     dispatch(action);
 
