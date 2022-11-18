@@ -18,6 +18,8 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { AuthContext } from '../../../Context/AuthContext/AuthContext';
+import { useNavigate } from 'react-router-dom';
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -83,18 +85,25 @@ const mdTheme = createTheme();
 
 function DashboardContent() {
   const [open, setOpen] = React.useState(true);
- 
+ const navigate = useNavigate();
   const toggleDrawer = () => {
     setOpen(!open);
   };
-  const [anchorEl, setAnchorEl] = React.useState(null);
   
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const {logout} = React.useContext(AuthContext);
   const openMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const handleLogout =()=>{
+    logout();
+    navigate('/login')
+    setAnchorEl(null);
+
+  }
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -157,7 +166,7 @@ function DashboardContent() {
             >
               
               <MenuItem onClick={handleClose}>Mi Cuenta</MenuItem>
-              <MenuItem onClick={handleClose}>Logout</MenuItem>
+              <MenuItem onClick={()=>handleLogout()}>Logout</MenuItem>
             </Menu>
 
           </Toolbar>
