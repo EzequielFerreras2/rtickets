@@ -11,7 +11,7 @@ const PrivateRoute = ({children}) => {
     useEffect(() => {
         console.log('Logeed')
         console.log(loggedUser)
-    }, [authState]);
+    }, [loggedUser]);
 
     return (loggedUser ? <Routes>{children}</Routes>:<Navigate to="/login"/>   )  ;
 }

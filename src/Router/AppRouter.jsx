@@ -8,10 +8,7 @@ import PrivateRoute from './PrivateRoute';
 const AppRouter = () => {
     return (
        <>
-<Routes>
-        
-
-        
+<Routes>          
             <Route path="/*" element={
                 <PrivateRoute>
                     <Route path="/home" element={<Home />}/>

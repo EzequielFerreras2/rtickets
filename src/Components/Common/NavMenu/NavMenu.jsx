@@ -207,7 +207,9 @@ function DashboardContent() {
           <Toolbar />
 
           <Box sx={{ mt: 1, mb: 1, ml:1 }}>
+
             <AppRouter/>
+            
           </Box>
             
         </Box>
