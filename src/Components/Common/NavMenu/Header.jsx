@@ -173,10 +173,8 @@ let userLoinginTrue = localStorage.getItem('User');
                     open={Boolean(anchorEl)}
                     onClose={handleClose}
                   >
-                  <Link to='/empresa' style={{ textDecoration: 'none' }}>
-                    <MenuItem onClick={handleClose}><AccountBalanceIcon/>  Empresa</MenuItem>
-                  </Link>
-                  <Link to='/usuario' style={{ textDecoration: 'none' }}>
+               
+                  <Link to='/usuario' style={{ textDecoration: 'none' , color: 'black'}}>
                     <MenuItem onClick={handleClose}><AccountBoxIcon/> Usuario</MenuItem>
                   </Link>
 
