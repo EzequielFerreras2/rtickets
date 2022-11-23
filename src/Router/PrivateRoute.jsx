@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Navigate, Routes } from 'react-router-dom';
+import { Navigate, Outlet, Routes } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext/AuthContext';
 
 const PrivateRoute = ({children}) => {
@@ -13,7 +13,7 @@ const PrivateRoute = ({children}) => {
         console.log(loggedUser)
     }, [loggedUser]);
 
-    return (loggedUser ? <Routes>{children}</Routes>:<Navigate to="/login"/>   )  ;
+    return (loggedUser ? children:<Navigate to={{ pathname: "/login" }} replace/>  )  ;
 }
 
 export default PrivateRoute;

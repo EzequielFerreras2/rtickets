@@ -6,7 +6,7 @@ import { authReducer } from './authReducer';
 
 
 const init =() =>{
-    const user =JSON.parse(localStorage.getItem('user')) ;
+    const user =JSON.parse(localStorage.getItem('User')) ;
 
     return{
         logged: !!user,
@@ -35,7 +35,7 @@ const login =(data)=>{
         }
     }
 
-    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('User', JSON.stringify(user));
 
     dispatch(action);
 
@@ -43,7 +43,7 @@ const login =(data)=>{
 
 
 const logout = ()=>{
-    localStorage.removeItem('user')
+    localStorage.removeItem('User')
     const action ={ type: types.logout}
     dispatch(action)
 

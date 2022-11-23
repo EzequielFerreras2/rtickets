@@ -32,7 +32,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignInSide() {
+export default function SignInSide({setnavbar}) {
  const {login,logout} = React.useContext(AuthContext);
  const { register, handleSubmit, watch, formState: { errors },reset } = useForm();
  const navegate = useNavigate();
@@ -47,7 +47,7 @@ const onSubmit=(data)=>{
     data.role ="Administrator"
     login(data)
     navegate('/home')
-    
+    setnavbar();
   }
   else{
 
