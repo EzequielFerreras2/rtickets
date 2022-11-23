@@ -47,7 +47,7 @@ const onSubmit=(data)=>{
     data.role ="Administrator"
     login(data)
     navegate('/home')
-    setnavbar();
+    
   }
   else{
 
@@ -70,7 +70,8 @@ const onSubmit=(data)=>{
 
 
   return (
-    <ThemeProvider theme={theme}>
+    <Box>
+<ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
         <Grid
@@ -163,5 +164,7 @@ const onSubmit=(data)=>{
         </Grid>
       </Grid>
     </ThemeProvider>
+    </Box>
+    
   );
 }

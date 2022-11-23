@@ -9,15 +9,18 @@ import { dashboardTheme } from './dashboardTheme';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   
-    <BrowserRouter>
+    
     <AtuhProvider>
       <ThemeProvider theme={dashboardTheme}>
+      <BrowserRouter>
       <Routes>
         <Route path='/*' element={<App />}/>
       </Routes>
+        
+      </BrowserRouter>
       </ThemeProvider>
       </AtuhProvider>
-    </BrowserRouter>
+   
   
 );
 

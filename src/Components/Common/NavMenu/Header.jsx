@@ -92,7 +92,6 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const Header = () => {
   const {logout} = React.useContext(AuthContext);
 const theme = useTheme();
-const [auth, setAuth] = React.useState(true);
 const [open, setOpen] = React.useState(false);
 const navigate = useNavigate();
 

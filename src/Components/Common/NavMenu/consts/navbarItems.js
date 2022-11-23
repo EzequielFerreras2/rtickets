@@ -14,7 +14,7 @@ export const mainSideBarItems =  [
         id:0,
         icon:<DashboardIcon/>,
         label:'Home',
-        route:'admindashboard',
+        route:'Home',
         hidden:false
     },
     {

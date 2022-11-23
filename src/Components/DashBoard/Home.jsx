@@ -2,6 +2,7 @@ import { Button } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
+import { Box } from '@mui/system';
 
 const Home = () => {
     const url ="https://pokeapi.co/api/v2/pokemon"
@@ -40,36 +41,49 @@ const Home = () => {
     }
     return (
        <>
+       <br/>
+       <Box>
        {render ?  
        
       
        
-      <div>
-        <h1 >Verdadero</h1> 
-        <div style={{ height: 700, width: '100%' }}>
-            <DataGrid
-            rows={api}
-            getRowId={(row) => row.name}
-            columns={columns}
-            onCellClick={(event)=> cellClick(event)}
-            pageSize={20}
-            rowsPerPageOptions={[20]}
-            checkboxSelection
-            />
-        </div>
-      </div>
-       
-       : 
-       
-       
-       <h1>Falso</h1> }
-       
-       
+       <div>
+         <h1 >Verdadero</h1> 
+         <h1 >Verdadero</h1> 
+         <h1 >Verdadero</h1> 
+         <h1 >Verdadero</h1> 
+         <h1 >Verdadero</h1> 
+         <h1 >Verdadero</h1> 
+         <h1 >Verdadero</h1> 
+         <h1 >Verdadero</h1> 
+         <h1 >Verdadero</h1> 
 
-       <Button variant='contained' style={{ marginTop:10 }} onClick={()=>change()}>
-        Cambio
-       </Button>
-
+         <div style={{ height: 700, width: '100%' }}>
+             <DataGrid
+             rows={api}
+             getRowId={(row) => row.name}
+             columns={columns}
+             onCellClick={(event)=> cellClick(event)}
+             pageSize={20}
+             rowsPerPageOptions={[20]}
+             checkboxSelection
+             />
+         </div>
+       </div>
+        
+        : 
+        
+        
+        <h1>Falso</h1> }
+        
+        
+ 
+        <Button variant='contained' style={{ marginTop:10 }} onClick={()=>change()}>
+         Cambio
+        </Button>
+ 
+       </Box>
+       
        </>
     );
 }
