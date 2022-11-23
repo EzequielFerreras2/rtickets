@@ -174,11 +174,11 @@ let userLoinginTrue = localStorage.getItem('User');
                     onClose={handleClose}
                   >
                
-                  <Link to='/usuario' style={{ textDecoration: 'none' , color: 'black'}}>
+                  <Link to='/usuario' style={{ textDecoration: 'none' , color: 'gray'}}>
                     <MenuItem onClick={handleClose}><AccountBoxIcon/> Usuario</MenuItem>
                   </Link>
 
-                  <MenuItem onClick={handleLogout}><LogoutIcon/> Logout</MenuItem>
+                  <MenuItem onClick={handleLogout} style={{ textDecoration: 'none' , color: 'black'}} ><LogoutIcon/> Logout</MenuItem>
                     
                   </Menu>
               </>
