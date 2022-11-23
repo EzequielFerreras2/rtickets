@@ -49,14 +49,7 @@ const Home = () => {
        
        <div>
          <h1 >Verdadero</h1> 
-         <h1 >Verdadero</h1> 
-         <h1 >Verdadero</h1> 
-         <h1 >Verdadero</h1> 
-         <h1 >Verdadero</h1> 
-         <h1 >Verdadero</h1> 
-         <h1 >Verdadero</h1> 
-         <h1 >Verdadero</h1> 
-         <h1 >Verdadero</h1> 
+      
 
          <div style={{ height: 700, width: '100%' }}>
              <DataGrid
