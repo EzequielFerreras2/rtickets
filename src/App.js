@@ -1,7 +1,7 @@
 import { CssBaseline } from "@mui/material";
 import { Box } from "@mui/system";
 import { useContext, useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import AdminDashboard from "./Components/DashBoard/AdminDashBoard/AdminDashboard";
 import UserDashBoard from "./Components/DashBoard/UserDashBoard/UserDashBoard";
 import PrivateRoute from "./Router/PrivateRoute";
@@ -12,10 +12,11 @@ import PageNotFound from "./Components/PageNotFound/PageNotFound";
 import Login from "./Components/Auth/Login/Login";
 import Home from "./Components/DashBoard/Home";
 import Layout from "./Layout"
+import PublicRoute from "./Router/PublicRoute";
 function App() {
   var [isNavbarHidden, setIsNavbarHidden] = useState(false);
   const {authState} = useContext(AuthContext);
-
+ const navegate =useNavigate();
 
 
   const DisplayHeader= (props) =>{
@@ -43,6 +44,7 @@ function App() {
     console.log(user)
   if (user === false){
     setIsNavbarHidden (true);
+    navegate('/login')
   }else{
     setIsNavbarHidden (false);
   }
@@ -82,12 +84,17 @@ function App() {
 
 
                      <Route path="/" element={<Layout/>}>
-                        <Route path="/login" isPrivate={false} element={<Login setNavbar={() =>updatenavbar()}/>}/> 
+
+                      <Route element={<PublicRoute/>}>
+                        <Route path="/login" isPrivate={false} element={<Login setNavbar={() =>updatenavbar()}/>}/>
+                      </Route>
+                         
                         <Route element={<PrivateRoute/>}>
-                        <Route path="/home" element={<Home/>}/>
+                              <Route path="/home" element={<Home/>}/>
                               <Route path="/admindashboard" element={<AdminDashboard />}/>
                               <Route path="/userdashboard" element={<UserDashBoard />}/>
                         </Route>
+
                     </Route>
                     <Route  path="*" isPrivate={true} element={<PageNotFound />} />
                 </Routes>
