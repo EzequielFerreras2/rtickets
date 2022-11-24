@@ -61,39 +61,17 @@ function App() {
               <AuthProvider>
 
                 <Routes> 
-                
-
-                {/* <Route element={<PrivateRoute/>}>
-
-                            <Route path="home" element={<Home/>}/>
-                              <Route path="admindashboard" element={<AdminDashboard />}/>
-                              <Route path="userdashboard" element={<UserDashBoard />}/>
-                  
-                </Route> */}
-                                  {/* <Route path="/" element={
-
-                  <PrivateRoute>
-                    
-                      <Route path="home" element={<Home/>}/>
-                      <Route path="admindashboard" element={<AdminDashboard />}/>
-                      <Route path="userdashboard" element={<UserDashBoard />}/>
-                      
-                  </PrivateRoute>
-                  }/>  */}
-
-
-
-                     <Route path="/" element={<Layout/>}>
+                    <Route path="/" element={<Layout/>}>
 
                       <Route element={<PublicRoute/>}>
                         <Route path="/login" isPrivate={false} element={<Login setNavbar={() =>updatenavbar()}/>}/>
                       </Route>
                          
-                        <Route element={<PrivateRoute/>}>
-                              <Route path="/home" element={<Home/>}/>
-                              <Route path="/admindashboard" element={<AdminDashboard />}/>
-                              <Route path="/userdashboard" element={<UserDashBoard />}/>
-                        </Route>
+                      <Route element={<PrivateRoute/>}>
+                        <Route path="/home" element={<Home/>}/>
+                        <Route path="/admindashboard" element={<AdminDashboard />}/>
+                        <Route path="/userdashboard" element={<UserDashBoard />}/>
+                      </Route>
 
                     </Route>
                     <Route  path="*" isPrivate={true} element={<PageNotFound />} />
