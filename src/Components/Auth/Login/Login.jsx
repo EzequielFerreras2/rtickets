@@ -47,7 +47,6 @@ const onSubmit=(data)=>{
     data.role ="Administrator"
     login(data)
     navegate('/home')
-    console.log(setNavbar)
     setNavbar();
   }
   else{

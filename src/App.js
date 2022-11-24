@@ -67,7 +67,7 @@ function App() {
                       </Route>
                          
                       <Route element={<PrivateRoute/>}>
-                        <Route path="/home" element={<Home/>}/>
+                        <Route path="/home" element={<Home setNavbar={() =>updateNavbar()}/>}/>
                         <Route path="/admindashboard" element={<AdminDashboard />}/>
                         <Route path="/userdashboard" element={<UserDashBoard />}/>
                       </Route>

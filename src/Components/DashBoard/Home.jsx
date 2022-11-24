@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { Box } from '@mui/system';
 
-const Home = () => {
+const Home = ({setNavbar}) => {
     const url ="https://pokeapi.co/api/v2/pokemon"
     const [render, setRender] = useState(false);
     const [rol, setRol] = useState("Admin");
@@ -20,6 +20,8 @@ const Home = () => {
       setApi(res.data.results)
     })
   }, []);
+
+ 
 
   const cellClick = (event) =>{
 
