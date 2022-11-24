@@ -55,9 +55,10 @@ const onSubmit=(data)=>{
 
 
     Swal.fire({
-      position: 'top-end',
+      position: 'center',
       icon: 'error',
-      title: 'Usuario o constrasena Erronea',
+      title: 'Error...',
+      text: 'Usuario o constrasena Incorrectos!',
       showConfirmButton: false,
       timer: 2000
     })
