@@ -7,11 +7,6 @@ const PublicRoute = ({children}) => {
     const {authState} = useContext(AuthContext);
 
     const loggedUser = authState.logged
-    
-    useEffect(() => {
-        console.log('Logeed')
-        console.log(loggedUser)
-    }, [loggedUser]);
 
     return (!loggedUser ? <Outlet/> : <Navigate to="/home"/>)   ;
 }

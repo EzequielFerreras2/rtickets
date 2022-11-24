@@ -21,7 +21,6 @@ function App() {
 
   const DisplayHeader= (props) =>{
     const isLoggedIn = props.isLoggedIn;
-    console.log(props)
     if (isLoggedIn !== true ) {
       return (
         <Header/>
@@ -30,23 +29,23 @@ function App() {
   }
 
   useEffect(() => {
-    updatenavbar();
+    updateNavbar();
  
-  }, [isNavbarHidden]);
+  }, []);
 
 
-  const updatenavbar =()=>{
+  const updateNavbar =()=>{
     const user = authState.logged
     // let user = localStorage.getItem('User')
   // ? JSON.parse(localStorage.getItem('User')).Token
   // : '';
-  console.log('user')
-    console.log(user)
   if (user === false){
     setIsNavbarHidden (true);
     navegate('/login')
   }else{
     setIsNavbarHidden (false);
+    navegate('/Home')
+   
   }
     
   }
@@ -64,7 +63,7 @@ function App() {
                     <Route path="/" element={<Layout/>}>
 
                       <Route element={<PublicRoute/>}>
-                        <Route path="/login" isPrivate={false} element={<Login setNavbar={() =>updatenavbar()}/>}/>
+                        <Route path="/login" isPrivate={false} element={<Login setNavbar={() =>updateNavbar()}/>}/>
                       </Route>
                          
                       <Route element={<PrivateRoute/>}>
