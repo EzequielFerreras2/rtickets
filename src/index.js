@@ -5,22 +5,24 @@ import {BrowserRouter, Route, Routes}from "react-router-dom";
 import AtuhProvider from './Context/AuthContext/AtuhProvider';
 import { ThemeProvider } from '@emotion/react';
 import { dashboardTheme } from './dashboardTheme';
+import { Provider } from 'react-redux';
+import {store} from './store/store'
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   
-    
-    <AtuhProvider>
-      <ThemeProvider theme={dashboardTheme}>
-      <BrowserRouter>
-      <Routes>
-        <Route path='/*' element={<App />}/>
-      </Routes>
-        
-      </BrowserRouter>
-      </ThemeProvider>
+    <Provider store={store}>
+      <AtuhProvider>
+        <ThemeProvider theme={dashboardTheme}>
+          <BrowserRouter>
+            <Routes>
+              <Route path='/*' element={<App />}/>
+            </Routes>
+          </BrowserRouter>
+        </ThemeProvider>
       </AtuhProvider>
-   
+    </Provider>
   
 );
 

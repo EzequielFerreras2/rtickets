@@ -17,6 +17,11 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
 import GoogleIcon from '@mui/icons-material/Google';
+import { useDispatch, useSelector } from 'react-redux';
+import { checkingAuthentication, startGoogleSingIn } from '../../../store/slices/auth';
+
+
+
 
 function Copyright(props) {
   return (
@@ -37,38 +42,59 @@ export default function Login({setNavbar}) {
  const {login,logout} = React.useContext(AuthContext);
  const { register, handleSubmit, watch, formState: { errors },reset } = useForm();
  const navegate = useNavigate();
+ const dispatch = useDispatch();
+const  {status} = useSelector((state) => state.auth)
 
 
 const onSubmit=(data)=>{
-  
 
-
-  if(data.email === "ezequielferreras2@gmail.com" && data.password ==="Kiyomaru.12078")
+  if( data.email ==='' || data.password ==='')
   {
-    data.role ="Administrator"
-    login(data)
-    navegate('/home')
-    setNavbar();
-  }
-  else{
-
-
-
     Swal.fire({
       position: 'center',
-      icon: 'error',
-      title: 'Error...',
-      text: 'Usuario o constrasena Incorrectos!',
-      showConfirmButton: false,
-      timer: 2000
+      icon: 'warning',
+      title: 'Atencion',
+      text: 'Los Campos Usuario o Constrasena no Puede estar vacios!!',
+      
     })
 
-    reset();
-    
   }
   
+  else{
+
+      if(data.email === "ezequielferreras2@gmail.com" && data.password ==="Kiyomaru.12078")
+      {
+        data.role ="Administrator"
+        login(data)
+        navegate('/home')
+        setNavbar();
+        dispatch(checkingAuthentication(data.email,data.password))
+      }
+      else{
+
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Error...',
+          text: 'Usuario o constrasena Incorrectos!',
+          showConfirmButton: false,
+          timer: 2000
+        })
+
+        reset();
+        
+      }
+
+  } 
 };
 
+const onGoogleSingIn =()=>{
+
+
+  dispatch(startGoogleSingIn())
+  console.log('onGoogleSingIn')
+
+};
 
 
   return (
@@ -116,18 +142,16 @@ const onSubmit=(data)=>{
                   
                         <TextField
                           margin="normal"
-                          required
                           fullWidth
                           id="email"
                           {...register("email")}
                           label="Email Address"
                           name="email" 
                           autoComplete="email"
-                          autoFocus
+                          
                         />
                         <TextField
                           margin="normal"
-                          required
                           fullWidth
                           {...register("password")}
                           name="password"
@@ -151,10 +175,11 @@ const onSubmit=(data)=>{
                         <Button
                           startIcon={<GoogleIcon/>}
                           fullWidth
-                          va
+                          variant="outlined"
                           sx={{  mb: 2 }}
+                          onClick={() => onGoogleSingIn()}
                         >
-                          Google SignIn
+                          Google Sign In
                         </Button>
                   
 
