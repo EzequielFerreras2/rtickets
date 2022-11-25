@@ -16,6 +16,7 @@ import { AuthContext } from '../../../Context/AuthContext/AuthContext';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
+import GoogleIcon from '@mui/icons-material/Google';
 
 function Copyright(props) {
   return (
@@ -146,6 +147,14 @@ const onSubmit=(data)=>{
                           sx={{ mt: 3, mb: 2 }}
                         >
                           Sign In
+                        </Button>
+                        <Button
+                          startIcon={<GoogleIcon/>}
+                          fullWidth
+                          va
+                          sx={{  mb: 2 }}
+                        >
+                          Google SignIn
                         </Button>
                   
 
