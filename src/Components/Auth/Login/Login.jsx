@@ -44,6 +44,7 @@ export default function Login({setNavbar}) {
  const navegate = useNavigate();
  const dispatch = useDispatch();
 const  {status} = useSelector((state) => state.auth)
+const isAuthenticating = React.useMemo( ()=> status ==='checking', [status])
 
 
 const onSubmit=(data)=>{
@@ -169,6 +170,7 @@ const onGoogleSingIn =()=>{
                           fullWidth
                           variant="contained"
                           sx={{ mt: 3, mb: 2 }}
+                          disabled={isAuthenticating}
                         >
                           Sign In
                         </Button>
@@ -178,6 +180,7 @@ const onGoogleSingIn =()=>{
                           variant="outlined"
                           sx={{  mb: 2 }}
                           onClick={() => onGoogleSingIn()}
+                          disabled={isAuthenticating}
                         >
                           Google Sign In
                         </Button>
@@ -190,7 +193,7 @@ const onGoogleSingIn =()=>{
                         </Link>
                       </Grid>
                       <Grid item>
-                        <Link href="#" variant="body2">
+                        <Link href="/register" variant="body2">
                           {"Don't have an account? Sign Up"}
                         </Link>
                       </Grid>

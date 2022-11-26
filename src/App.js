@@ -13,6 +13,7 @@ import Login from "./Components/Auth/Login/Login";
 import Home from "./Components/DashBoard/Home";
 import Layout from "./Layout"
 import PublicRoute from "./Router/PublicRoute";
+import Register from './Components/Auth/Register/Register'
 function App() {
   var [isNavbarHidden, setIsNavbarHidden] = useState(false);
   const {authState} = useContext(AuthContext);
@@ -68,6 +69,7 @@ function App() {
                          
                       <Route element={<PrivateRoute/>}>
                         <Route path="/home" element={<Home setNavbar={() =>updateNavbar()}/>}/>
+                        <Route path="/register" element={<Register/>}/>
                         <Route path="/admindashboard" element={<AdminDashboard />}/>
                         <Route path="/userdashboard" element={<UserDashBoard />}/>
                       </Route>
