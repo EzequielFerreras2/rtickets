@@ -105,7 +105,7 @@ const onGoogleSingIn =()=>{
     <Box style={{position: 'absolute', left: '50%', top: '50%',transform: 'translate(-50%, -50%)'}}
     display="flex"justifyContent="center"alignItems="center">
 
-      <Grid container justify = "center" component="main" sx={{ height: '55vh', width: '100vh' }}>
+      <Grid container justify = "center" component="main" sx={{ height: '55vh', width: '120vh' }}>
               <CssBaseline />
               <Grid
                 item
