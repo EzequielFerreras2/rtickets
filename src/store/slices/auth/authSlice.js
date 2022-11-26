@@ -17,11 +17,28 @@ initialState: {
  },
   reducers: {
 
-    login: (state, action) =>{
+    login: (state, {payload}) =>{
+
+        state.status='authenticated' // not-authenticated //checking //authenticated
+        state.uid= payload.uid;
+        state.email=payload.email;
+        state.disPlayName= payload.disPlayName;
+        state.role= payload.role;
+        state.photoURL= payload.photoURL;
+        state.errorMessage= null;
+    
 
     },
 
-    logout: (state, payload) =>{
+    logout: (state, {payload}) =>{
+
+    state.status='not-authenticated' // not-authenticated //checking //authenticated
+    state.uid= null;
+    state.email=null;
+    state.disPlayName= null;
+    state.role= null;
+    state.photoURL= null;
+    state.errorMessage= payload.errorMessage;
 
     },
 
