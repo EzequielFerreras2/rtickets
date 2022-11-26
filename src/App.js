@@ -65,11 +65,11 @@ function App() {
 
                       <Route element={<PublicRoute/>}>
                         <Route path="/login" isPrivate={false} element={<Login setNavbar={() =>updateNavbar()}/>}/>
+                        <Route path="/register" element={<Register/>}/>
                       </Route>
                          
                       <Route element={<PrivateRoute/>}>
                         <Route path="/home" element={<Home setNavbar={() =>updateNavbar()}/>}/>
-                        <Route path="/register" element={<Register/>}/>
                         <Route path="/admindashboard" element={<AdminDashboard />}/>
                         <Route path="/userdashboard" element={<UserDashBoard />}/>
                       </Route>

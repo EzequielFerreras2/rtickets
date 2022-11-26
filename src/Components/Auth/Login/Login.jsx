@@ -5,7 +5,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
+
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -14,7 +14,7 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { AuthContext } from '../../../Context/AuthContext/AuthContext';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
 import GoogleIcon from '@mui/icons-material/Google';
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,9 +27,9 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
+      <a color="inherit" href='https://www.linkedin.com/in/ezequiel-ferreras-a20619134'>
+        {"RticketsApp"}
+      </a>{' '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
@@ -146,7 +146,7 @@ const onGoogleSingIn =()=>{
                           fullWidth
                           id="email"
                           {...register("email")}
-                          label="Email Address"
+                          label="Correo Electronico"
                           name="email" 
                           autoComplete="email"
                           
@@ -156,15 +156,12 @@ const onGoogleSingIn =()=>{
                           fullWidth
                           {...register("password")}
                           name="password"
-                          label="Password"
+                          label="Contraseña"
                           type="password"
                           id="password"
                           autoComplete="current-password"
                         />
-                        <FormControlLabel
-                          control={<Checkbox value="remember" color="primary" />}
-                          label="Remember me"
-                        />
+                        
                         <Button
                           type="submit"
                           fullWidth
@@ -188,13 +185,13 @@ const onGoogleSingIn =()=>{
 
                     <Grid container>
                       <Grid item xs>
-                        <Link href="#" variant="body2">
-                          Forgot password?
+                        <Link to='/register' variant="body2">
+                          {"Olvidaste Tu Contraseña?"}
                         </Link>
                       </Grid>
                       <Grid item>
-                        <Link href="/register" variant="body2">
-                          {"Don't have an account? Sign Up"}
+                        <Link to='/register' variant="body2">
+                          {"No tienes cuenta? Registrate"}
                         </Link>
                       </Grid>
                     </Grid>
