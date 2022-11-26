@@ -139,8 +139,6 @@ const onGoogleSingIn =()=>{
                   </Typography>
                   
                   <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate  sx={{ mt: 1 }}>
-
-                  
                         <TextField
                           margin="normal"
                           fullWidth

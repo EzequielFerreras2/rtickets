@@ -10,6 +10,12 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+
+
 
 function Copyright(props) {
   return (
@@ -27,13 +33,28 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+
+  const schema = yup.object().shape({
+    email: yup.string().email().required(),
+    fullName: yup.string().required(),
+    password1: yup.string().min(8).max(32).required(),
+    password2: yup.string().min(8).max(32).required(),
+  });
+
+  const { register, handleSubmit, watch, formState: { errors },reset } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+ 
+
+
+  const onSubmit = (event) => {
+   
+    console.log("Event")
+    console.log(event)
+    console.log("Errors")
+    console.log(errors.fullName?.message)
+    
   };
 
   return (
@@ -54,51 +75,60 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" noValidate onSubmit={handleSubmit(onSubmit)} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} >
+
                 <TextField
-                 
+                 {...register("fullName")}
                   name="fullName"
-                  required
                   fullWidth
-                  id="firstName"
+                  id="fullName"
                   label="Nombre Completo"
                   autoFocus
+                  error={errors.fullName ? true : false}
+                  helperText={errors.fullName?.message}
                 />
               </Grid>
              
               <Grid item xs={12}>
                 <TextField
                   required
+                  {...register("email")}
                   fullWidth
                   id="email"
                   label="Correo electronico"
                   name="email"
                   autoComplete="email"
+                  error={errors.email ? true : false}
+                  helperText={errors.email?.message}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
+                  {...register("password1")}
                   fullWidth
                   name="password1"
                   label="Contraseña"
                   type="password1"
                   id="password1"
-                
+                  error={errors.password1 ? true : false}
+                  helperText={errors.password1?.message}
                 />
                 
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                {...register("password2")}
                   required
                   fullWidth
                   name="password2"
                   label="Confirmar Contraseña"
                   type="password2"
                   id="password2"
-                
+                  error={errors.password2 ? true : false}
+                  helperText={errors.password2?.message}
                 />
                 
               </Grid>
