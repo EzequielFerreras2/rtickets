@@ -35,13 +35,13 @@ const theme = createTheme();
 export default function SignUp() {
 
   const schema = yup.object().shape({
-    email: yup.string().email().required(),
-    fullName: yup.string().required(),
-    password1: yup.string().min(8).max(32).required(),
-    password2: yup.string().min(8).max(32).required(),
+    Email: yup.string().email().required().max(60),
+    FullName: yup.string().required(),
+    Password: yup.string().min(8).max(32).required(),
+    ConfPassword: yup.string().min(8).max(32).required(),
   });
 
-  const { register, handleSubmit, watch, formState: { errors },reset } = useForm({
+  const { register, handleSubmit, watch, formState: { errors }, reset } = useForm({
     resolver: yupResolver(schema),
   });
 
@@ -80,55 +80,55 @@ export default function SignUp() {
               <Grid item xs={12} >
 
                 <TextField
-                 {...register("fullName")}
-                  name="fullName"
+                 {...register("FullName")}
+                  name="FullName"
                   fullWidth
-                  id="fullName"
+                  id="FullName"
                   label="Nombre Completo"
                   autoFocus
-                  error={errors.fullName ? true : false}
-                  helperText={errors.fullName?.message}
+                  error={errors.FullName ? true : false}
+                  helperText={errors.FullName?.message}
                 />
               </Grid>
              
               <Grid item xs={12}>
                 <TextField
                   required
-                  {...register("email")}
+                  {...register("Email")}
                   fullWidth
-                  id="email"
-                  label="Correo electronico"
-                  name="email"
-                  autoComplete="email"
-                  error={errors.email ? true : false}
-                  helperText={errors.email?.message}
+                  id="Email"
+                  label="Correo Electronico"
+                  name="Email"
+                  autoComplete="Email"
+                  error={errors.Email ? true : false}
+                  helperText={errors.Email?.message}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
-                  {...register("password1")}
+                  {...register("Password")}
                   fullWidth
-                  name="password1"
+                  name="Password"
                   label="Contraseña"
-                  type="password1"
-                  id="password1"
-                  error={errors.password1 ? true : false}
-                  helperText={errors.password1?.message}
+                  type="Password"
+                  id="password"
+                  error={errors.Password ? true : false}
+                  helperText={errors.Password?.message}
                 />
                 
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                {...register("password2")}
+                {...register("ConfPassword")}
                   required
                   fullWidth
-                  name="password2"
+                  name="ConfPassword"
                   label="Confirmar Contraseña"
-                  type="password2"
-                  id="password2"
-                  error={errors.password2 ? true : false}
-                  helperText={errors.password2?.message}
+                  type="Password"
+                  id="ConfPassword"
+                  error={errors.ConfPassword ? true : false}
+                  helperText={errors.ConfPassword?.message}
                 />
                 
               </Grid>
