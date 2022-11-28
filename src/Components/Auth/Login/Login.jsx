@@ -58,8 +58,8 @@ const { register, handleSubmit, watch, formState: { errors }, reset } = useForm(
 });
 
 const onSubmit=(data)=>{
-
-      if(data.email === "ezequielferreras2@gmail.com" && data.password ==="Kiyomaru.12078")
+  
+      if(data.Email === "ezequielferreras2@gmail.com" && data.Password ==="Kiyomaru.12078")
       {
         data.role ="Administrator"
         login(data)
@@ -68,7 +68,6 @@ const onSubmit=(data)=>{
         dispatch(checkingAuthentication(data.email,data.password))
       }
       else{
-
         Swal.fire({
           position: 'center',
           icon: 'error',
@@ -78,8 +77,7 @@ const onSubmit=(data)=>{
           timer: 2000
         })
 
-        reset();
-        
+        reset(); 
       }
 
   
@@ -150,12 +148,11 @@ const onGoogleSingIn =()=>{
                         <TextField
                           margin="normal"
                           fullWidth
-                          {...register("password")}
-                          name="password"
+                          {...register("Password")}
+                          name="Password"
                           label="Contraseña"
                           type="password"
-                          id="password"
-                          autoComplete="current-password"
+                          id="Password"
                           error={errors.Password ? true : false}
                           helperText={errors.Password?.message}
                         />

@@ -17,7 +17,7 @@ const PublicRoute = ({children}) => {
        
   
 
-    return (loggedUser ? <Outlet/> : <Navigate to="/home"/>)   ;
+    return (!loggedUser ? <Outlet/> : <Navigate to="/home"/>)   ;
 }
 
 export default PublicRoute;
