@@ -1,5 +1,5 @@
 import { async } from '@firebase/util'
-import { registerUserWithPassword, singInWhithGoogle } from '../../../firebase/providers'
+import { registerUserWithPassword, singInWhithGoogle,singInWhithEmailPassword } from '../../../firebase/providers'
 import { login, logout, chekingCredentials } from './authSlice'
 
 
@@ -32,6 +32,27 @@ export const startGoogleSingIn =() =>{
 
 }
 
+export const startLogi =({email,password}) =>{
+
+    return async( dispatch)=>
+    {
+        dispatch(chekingCredentials());
+
+        const results =await singInWhithEmailPassword({email,password})
+
+
+        if(!results.ok)
+        {
+            dispatch(logout( results ));
+            console.log(results) 
+        }
+        else{
+
+            dispatch(login(results))
+        }
+    }
+
+}
 export const startCreatingUserWithEmailPassword =({email,password,displayName})=>{
 
     return async(dispatch)=>{

@@ -14,7 +14,7 @@ const PrivateRoute = ({children}) => {
     const loggedUser = authState.logged
 
 
-    return (loggedUser ? <Outlet/> : <Navigate to="/login"/>)   ;
+    return (status === 'authenticated' ? <Outlet/> : <Navigate to="/login"/>)   ;
 }
 
 export default PrivateRoute;

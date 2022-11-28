@@ -30,8 +30,7 @@ initialState: {
 
     logout: (state, {payload}) =>{
 
-        console.log(payload)
-
+   
     state.status='not-authenticated' // not-authenticated //checking //authenticated
     state.uid= null;
     state.email=null;

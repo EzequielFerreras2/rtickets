@@ -17,7 +17,7 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
 import GoogleIcon from '@mui/icons-material/Google';
 import { useDispatch, useSelector } from 'react-redux';
-import { checkingAuthentication, startGoogleSingIn } from '../../../store/slices/auth';
+import { checkingAuthentication, startGoogleSingIn, startLogi } from '../../../store/slices/auth';
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -43,12 +43,12 @@ export default function Login({setNavbar}) {
 const {login,logout} = React.useContext(AuthContext);
 const navegate = useNavigate();
 const dispatch = useDispatch();
-const  {status} = useSelector((state) => state.auth);
+const  {status,errorMessage} = useSelector((state) => state.auth);
 const isAuthenticating = React.useMemo( ()=> status ==='checking', [status]);
 
 const schema = yup.object().shape({
-  Email: yup.string().email().required(),
-  Password: yup.string().min(8).max(32).required(),
+  email: yup.string().email().required(),
+  password: yup.string().min(8).max(32).required(),
  
 });
 
@@ -57,28 +57,24 @@ const { register, handleSubmit, watch, formState: { errors }, reset } = useForm(
   resolver: yupResolver(schema),
 });
 
-const onSubmit=(data)=>{
-  
-      if(data.Email === "ezequielferreras2@gmail.com" && data.Password ==="Kiyomaru.12078")
-      {
-        data.role ="Administrator"
-        login(data)
-        navegate('/home')
-        setNavbar();
-        dispatch(checkingAuthentication(data.email,data.password))
-      }
-      else{
-        Swal.fire({
-          position: 'center',
-          icon: 'error',
-          title: 'Error...',
-          text: 'Usuario o constrasena Incorrectos!',
-          showConfirmButton: false,
-          timer: 2000
-        })
+const onSubmit=({email,password})=>{
 
-        reset(); 
-      }
+        // data.role ="Administrator"
+        // login(data)
+        // navegate('/home')
+        // setNavbar();
+        
+        dispatch(startLogi({email,password}))
+
+        if(!!errorMessage){
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Error...',
+            text: errorMessage,
+          
+          })
+        }
 
   
 };
@@ -87,7 +83,7 @@ const onGoogleSingIn =()=>{
 
 
   dispatch(startGoogleSingIn())
-  console.log('onGoogleSingIn')
+
 
 };
 
@@ -136,25 +132,25 @@ const onGoogleSingIn =()=>{
                         <TextField
                           margin="normal"
                           fullWidth
-                          id="Email"
-                          {...register("Email")}
+                          id="email"
+                          {...register("email")}
                           label="Correo Electronico"
-                          name="Email" 
-                          autoComplete="Email"
-                          error={errors.Email ? true : false}
-                          helperText={errors.Email?.message}
+                          name="email" 
+                          autoComplete="email"
+                          error={errors.email ? true : false}
+                          helperText={errors.email?.message}
                           
                         />
                         <TextField
                           margin="normal"
                           fullWidth
-                          {...register("Password")}
-                          name="Password"
+                          {...register("password")}
+                          name="password"
                           label="Contraseña"
                           type="password"
-                          id="Password"
-                          error={errors.Password ? true : false}
-                          helperText={errors.Password?.message}
+                          id="password"
+                          error={errors.password ? true : false}
+                          helperText={errors.password?.message}
                         />
                         
                         <Button
