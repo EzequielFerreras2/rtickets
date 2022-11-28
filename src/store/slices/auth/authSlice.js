@@ -8,8 +8,7 @@ initialState: {
     status:'not-authenticated', // not-authenticated //checking //authenticated
     uid: null,
     email:null,
-    disPlayName: null,
-    role: null,
+    displayName: null,
     photoURL: null,
     errorMessage: null,
 
@@ -19,11 +18,13 @@ initialState: {
 
     login: (state, {payload}) =>{
 
+        console.log("payload")
+        console.log(payload)
+
         state.status='authenticated' // not-authenticated //checking //authenticated
         state.uid= payload.uid;
-        state.email=payload.email;
-        state.disPlayName= payload.disPlayName;
-        state.role= payload.role;
+        state.email= payload.email;
+        state.displayName= payload.displayName;
         state.photoURL= payload.photoURL;
         state.errorMessage= null;
     
@@ -35,8 +36,7 @@ initialState: {
     state.status='not-authenticated' // not-authenticated //checking //authenticated
     state.uid= null;
     state.email=null;
-    state.disPlayName= null;
-    state.role= null;
+    state.displayName= null;
     state.photoURL= null;
     state.errorMessage= payload.errorMessage;
 
@@ -45,7 +45,9 @@ initialState: {
     chekingCredentials: (state) =>{
 
         state.status = 'checking';
-    }
+    },
+
+
 
  }
 

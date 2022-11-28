@@ -13,7 +13,9 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-
+import Swal from 'sweetalert2'
+import { startCreatingUserWithEmailPassword } from '../../../store/slices/auth';
+import { useDispatch } from 'react-redux';
 
 
 
@@ -35,12 +37,13 @@ const theme = createTheme();
 export default function SignUp() {
 
   const schema = yup.object().shape({
-    Email: yup.string().email().required(),
-    FullName: yup.string().required().max(60),
-    Password: yup.string().min(8).max(32).required(),
-    ConfPassword: yup.string().min(8).max(32).required(),
+    email: yup.string().email().required(),
+    displayName: yup.string().required().max(60),
+    password: yup.string().min(8).max(32).required(),
+    confPassword: yup.string().min(8).max(32).required(),
   });
-
+  
+  const dispatch = useDispatch();
   const { register, handleSubmit, watch, formState: { errors }, reset } = useForm({
     resolver: yupResolver(schema),
   });
@@ -48,12 +51,27 @@ export default function SignUp() {
  
 
 
-  const onSubmit = (event) => {
+  const onSubmit = (data) => {
    
-    console.log("Event")
-    console.log(event)
-    console.log("Errors")
-    console.log(errors.fullName?.message)
+    if( data.password === data.confPassword)
+    {
+
+      dispatch(startCreatingUserWithEmailPassword(data))
+      
+    } 
+    else
+    {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Error...',
+        text: 'Las contraseñas deben ser iguales!',
+        showConfirmButton: false,
+        timer: 2000
+      })
+    }
+    
+ 
     
   };
 
@@ -80,55 +98,55 @@ export default function SignUp() {
               <Grid item xs={12} >
 
                 <TextField
-                 {...register("FullName")}
-                  name="FullName"
+                 {...register("displayName")}
+                  name="displayName"
                   fullWidth
-                  id="FullName"
+                  id="displayName"
                   label="Nombre Completo"
                   autoFocus
-                  error={errors.FullName ? true : false}
-                  helperText={errors.FullName?.message}
+                  error={!!errors.displayName}
+                  helperText={errors.displayName?.message}
                 />
               </Grid>
              
               <Grid item xs={12}>
                 <TextField
                   required
-                  {...register("Email")}
+                  {...register("email")}
                   fullWidth
-                  id="Email"
+                  id="email"
                   label="Correo Electronico"
-                  name="Email"
-                  autoComplete="Email"
-                  error={errors.Email ? true : false}
-                  helperText={errors.Email?.message}
+                  name="email"
+                  autoComplete="email"
+                  error={!!errors.email}
+                  helperText={errors.email?.message}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
-                  {...register("Password")}
+                  {...register("password")}
                   fullWidth
-                  name="Password"
+                  name="password"
                   label="Contraseña"
-                  type="Password"
+                  type="password"
                   id="password"
-                  error={errors.Password ? true : false}
-                  helperText={errors.Password?.message}
+                  error={!!errors.password}
+                  helperText={errors.password?.message}
                 />
                 
               </Grid>
               <Grid item xs={12}>
                 <TextField
-                {...register("ConfPassword")}
+                {...register("confPassword")}
                   required
                   fullWidth
-                  name="ConfPassword"
-                  label="Confirmar Contraseña"
+                  name="confPassword"
+                  label="confirmar Contraseña"
                   type="Password"
-                  id="ConfPassword"
-                  error={errors.ConfPassword ? true : false}
-                  helperText={errors.ConfPassword?.message}
+                  id="confPassword"
+                  error={!!errors.confPassword}
+                  helperText={errors.confPassword?.message}
                 />
                 
               </Grid>
