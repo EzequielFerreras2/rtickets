@@ -15,7 +15,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Swal from 'sweetalert2'
 import { startCreatingUserWithEmailPassword } from '../../../store/slices/auth';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 
@@ -44,10 +44,13 @@ export default function SignUp() {
   });
   
   const dispatch = useDispatch();
+  const { status, errorMessage } = useSelector( (state) => state.auth)
+  const isAuthenticating = React.useMemo( ()=> status ==='checking', [status]);
   const { register, handleSubmit, watch, formState: { errors }, reset } = useForm({
     resolver: yupResolver(schema),
   });
 
+ 
  
 
 
@@ -57,8 +60,21 @@ export default function SignUp() {
     {
 
       dispatch(startCreatingUserWithEmailPassword(data))
+
+      if(!!errorMessage){
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Error...',
+          text: errorMessage,
+        
+        })
+       
+    
+      }
       
-    } 
+    }
+
     else
     {
       Swal.fire({
@@ -66,8 +82,7 @@ export default function SignUp() {
         icon: 'error',
         title: 'Error...',
         text: 'Las contraseñas deben ser iguales!',
-        showConfirmButton: false,
-        timer: 2000
+     
       })
     }
     
@@ -153,6 +168,7 @@ export default function SignUp() {
               
             </Grid>
             <Button
+              disabled={isAuthenticating}
               type="submit"
               fullWidth
               variant="contained"

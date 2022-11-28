@@ -18,9 +18,6 @@ initialState: {
 
     login: (state, {payload}) =>{
 
-        console.log("payload")
-        console.log(payload)
-
         state.status='authenticated' // not-authenticated //checking //authenticated
         state.uid= payload.uid;
         state.email= payload.email;
@@ -32,6 +29,8 @@ initialState: {
     },
 
     logout: (state, {payload}) =>{
+
+        console.log(payload)
 
     state.status='not-authenticated' // not-authenticated //checking //authenticated
     state.uid= null;
