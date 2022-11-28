@@ -35,8 +35,8 @@ const theme = createTheme();
 export default function SignUp() {
 
   const schema = yup.object().shape({
-    Email: yup.string().email().required().max(60),
-    FullName: yup.string().required(),
+    Email: yup.string().email().required(),
+    FullName: yup.string().required().max(60),
     Password: yup.string().min(8).max(32).required(),
     ConfPassword: yup.string().min(8).max(32).required(),
   });

@@ -5,7 +5,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -19,7 +18,8 @@ import Swal from 'sweetalert2'
 import GoogleIcon from '@mui/icons-material/Google';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkingAuthentication, startGoogleSingIn } from '../../../store/slices/auth';
-
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 
 
@@ -39,29 +39,25 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Login({setNavbar}) {
- const {login,logout} = React.useContext(AuthContext);
- const { register, handleSubmit, watch, formState: { errors },reset } = useForm();
- const navegate = useNavigate();
- const dispatch = useDispatch();
-const  {status} = useSelector((state) => state.auth)
-const isAuthenticating = React.useMemo( ()=> status ==='checking', [status])
 
+const {login,logout} = React.useContext(AuthContext);
+const navegate = useNavigate();
+const dispatch = useDispatch();
+const  {status} = useSelector((state) => state.auth);
+const isAuthenticating = React.useMemo( ()=> status ==='checking', [status]);
+
+const schema = yup.object().shape({
+  Email: yup.string().email().required(),
+  Password: yup.string().min(8).max(32).required(),
+ 
+});
+
+
+const { register, handleSubmit, watch, formState: { errors }, reset } = useForm({
+  resolver: yupResolver(schema),
+});
 
 const onSubmit=(data)=>{
-
-  if( data.email ==='' || data.password ==='')
-  {
-    Swal.fire({
-      position: 'center',
-      icon: 'warning',
-      title: 'Atencion',
-      text: 'Los Campos Usuario o Constrasena no Puede estar vacios!!',
-      
-    })
-
-  }
-  
-  else{
 
       if(data.email === "ezequielferreras2@gmail.com" && data.password ==="Kiyomaru.12078")
       {
@@ -86,7 +82,7 @@ const onSubmit=(data)=>{
         
       }
 
-  } 
+  
 };
 
 const onGoogleSingIn =()=>{
@@ -142,11 +138,13 @@ const onGoogleSingIn =()=>{
                         <TextField
                           margin="normal"
                           fullWidth
-                          id="email"
-                          {...register("email")}
+                          id="Email"
+                          {...register("Email")}
                           label="Correo Electronico"
-                          name="email" 
-                          autoComplete="email"
+                          name="Email" 
+                          autoComplete="Email"
+                          error={errors.Email ? true : false}
+                          helperText={errors.Email?.message}
                           
                         />
                         <TextField
@@ -158,6 +156,8 @@ const onGoogleSingIn =()=>{
                           type="password"
                           id="password"
                           autoComplete="current-password"
+                          error={errors.Password ? true : false}
+                          helperText={errors.Password?.message}
                         />
                         
                         <Button
