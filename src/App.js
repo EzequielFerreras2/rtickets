@@ -1,11 +1,10 @@
 import { CssBaseline } from "@mui/material";
 import { Box } from "@mui/system";
-import { useContext, useEffect, useState } from "react";
-import {Route, Routes, useNavigate } from "react-router-dom";
+import {useEffect, useState } from "react";
+import {Route, Routes} from "react-router-dom";
 import PrivateRoute from "./Router/PrivateRoute";
 import AuthProvider from "./Context/AuthContext/AtuhProvider"
 import Header from "./Components/Common/NavMenu/Header";
-import {AuthContext} from "./Context/AuthContext/AuthContext"
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { onAuthStateChanged } from "firebase/auth";

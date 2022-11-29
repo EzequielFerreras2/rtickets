@@ -50,10 +50,6 @@ export default function SignUp() {
     resolver: yupResolver(schema),
   });
 
- 
- 
-
-
   const onSubmit = (data) => {
    
     if( data.password === data.confPassword)
@@ -69,12 +65,7 @@ export default function SignUp() {
           text: errorMessage,
         
         })
-       
-    
       }
-
-      
-      
     }
 
     else
@@ -87,9 +78,6 @@ export default function SignUp() {
      
       })
     }
-    
- 
-    
   };
 
   return (

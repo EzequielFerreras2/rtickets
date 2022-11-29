@@ -1,5 +1,3 @@
-import { async } from '@firebase/util';
-import { current } from '@reduxjs/toolkit';
 import {createUserWithEmailAndPassword, GoogleAuthProvider,signInWithEmailAndPassword,signInWithPopup, updateProfile} from 'firebase/auth'
 import { FirebaseAuth } from './config';
 
@@ -16,10 +14,11 @@ export const singInWhithGoogle = async() =>{
         return{
             ok:true,
             displayName,email,photoURL,uid
-        }
+              }
     }
     catch(error)
     {
+
     // Handle Errors here.
     const errorCode = error.code;
     const errorMessage = error.message;
@@ -27,39 +26,39 @@ export const singInWhithGoogle = async() =>{
     const credential = GoogleAuthProvider.credentialFromError(error);
 
     return{
-
         ok:false,
         errorMessage
-    }
+          }
     
     }
 
-}
+};
  export const singInWhithEmailPassword = async({email,password}) =>{
 
-    try {
-        
+    try
+    {
         const result= await signInWithEmailAndPassword(FirebaseAuth, email,password);
         const {uid,photoURL,displayName}=result.user;
 
         return{
             ok:true,
             uid,photoURL,displayName
-           }
+              }
     } 
     
-    catch (error) {
+    catch (error) 
+    {
         return{
-
             ok:false,
             errorMessage:error.message
-        }
+              }
     }
  }
 
 export const registerUserWithPassword = async({email,password,displayName} )=>{
-    try {
 
+    try 
+    {
        const resp = await createUserWithEmailAndPassword(FirebaseAuth,email,password)
        const {uid,photoURL}= resp.user
        await updateProfile(FirebaseAuth.currentUser,{ displayName})
@@ -68,18 +67,16 @@ export const registerUserWithPassword = async({email,password,displayName} )=>{
        return{
         ok:true,
         uid,photoURL, email, displayName
-       }
+             }
 
 
         
-    } catch (error) {
-
+    } catch (error) 
+    {
         return{
-
             ok:false,
             errorMessage:error.message
-        }
-        
+              }   
     }
 
 

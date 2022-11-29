@@ -1,4 +1,3 @@
-import { async } from '@firebase/util'
 import { registerUserWithPassword, singInWhithGoogle,singInWhithEmailPassword } from '../../../firebase/providers'
 import { login, logout, chekingCredentials } from './authSlice'
 
