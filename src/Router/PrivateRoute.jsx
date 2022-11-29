@@ -1,20 +1,27 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Navigate, Outlet} from 'react-router-dom';
+import { Navigate, Outlet, Route, Routes} from 'react-router-dom';
+import AdminDashboard from '../Components/DashBoard/AdminDashBoard/AdminDashboard';
+import Home from '../Components/DashBoard/Home';
+import UserDashBoard from '../Components/DashBoard/UserDashBoard/UserDashBoard';
 import { AuthContext } from '../Context/AuthContext/AuthContext';
 
-const PrivateRoute = ({children}) => {
+const PrivateRoute = (updateNavbar) => {
 
-    const  {status} = useSelector((state) => state.auth);
+    // const  status = localStorage.getItem('status');
 
-    const [loggedRedux, setLoggedRedux] = useState(false)
+    // return (status === 'authenticated' ? <Outlet/> : <Navigate to="/login"/>)   ;
 
-    const {authState} = useContext(AuthContext);
+    return(
 
-    const loggedUser = authState.logged
+        <Routes>
+            
+            <Route path="/home" element={<Home setNavbar={() =>updateNavbar()}/>}/>
+            <Route path="/admindashboard" element={<AdminDashboard />}/>
+            <Route path="/userdashboard" element={<UserDashBoard />}/>
 
-
-    return (status === 'authenticated' ? <Outlet/> : <Navigate to="/login"/>)   ;
+        </Routes>
+    )
 }
 
 export default PrivateRoute;

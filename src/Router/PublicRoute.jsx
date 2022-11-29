@@ -1,23 +1,22 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Navigate, Outlet} from 'react-router-dom';
+import { Navigate, Outlet, Route, Routes} from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext/AuthContext';
+import Login from '../Components/Auth/Login/Login'
+import Register from '../Components/Auth/Register/Register'
+const PublicRoute = (updateNavbar) => {
+    // const  status = localStorage.getItem('status');
 
-const PublicRoute = ({children}) => {
-    const  {status} = useSelector((state) => state.auth);
+    //    // not-authenticated //checking //authenticated
+    // return (status !== 'Authenticated'   ? <Outlet/> : <Navigate to="/home"/>)   ;
 
-    const [loggedRedux, setLoggedRedux] = useState(true)
+    return(
 
-    const {authState} = useContext(AuthContext);
-
-    const loggedUser = authState.logged
-
-    
-
-       // not-authenticated //checking //authenticated
-  
-
-    return (status === 'not-authenticated'   ? <Outlet/> : <Navigate to="/home"/>)   ;
+        <Routes>
+            <Route path="/login" isPrivate={false} element={<Login setNavbar={() =>updateNavbar()}/>}/>
+            <Route path="/register" element={<Register/>}/>
+        </Routes>
+    )
 }
 
-export default PublicRoute;
+export default PublicRoute; 

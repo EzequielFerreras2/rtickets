@@ -14,10 +14,21 @@ import Home from "./Components/DashBoard/Home";
 import Layout from "./Layout"
 import PublicRoute from "./Router/PublicRoute";
 import Register from './Components/Auth/Register/Register'
+import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
+import { onAuthStateChanged } from "firebase/auth";
+import { FirebaseAuth } from "./firebase/config";
+import { login, logout } from "./store/slices/auth";
+
 function App() {
-  var [isNavbarHidden, setIsNavbarHidden] = useState(false);
-  const {authState} = useContext(AuthContext);
- const navegate =useNavigate();
+
+var [isNavbarHidden, setIsNavbarHidden] = useState(false);
+const {authState} = useContext(AuthContext);
+const navegate =useNavigate();
+const dispatch = useDispatch();
+
+
+ const {status } = useSelector(state => state.auth);
 
 
   const DisplayHeader= (props) =>{
@@ -30,17 +41,18 @@ function App() {
   }
 
   useEffect(() => {
+
+
     updateNavbar();
  
   }, []);
 
 
   const updateNavbar =()=>{
-    const user = authState.logged
     // let user = localStorage.getItem('User')
   // ? JSON.parse(localStorage.getItem('User')).Token
   // : '';
-  if (user === false){
+  if (status !== 'authenticated'){
     setIsNavbarHidden (true);
     navegate('/login')
   }else{
@@ -52,6 +64,53 @@ function App() {
   }
 
 
+ useEffect(() => {
+
+  if( status === 'checking')
+  {
+    Swal.fire({
+      title: `${status}...`,
+      timerProgressBar: true,
+      allowOutsideClick: false,
+      didOpen: () => {
+          Swal.showLoading()
+      },
+      
+  });
+
+ 
+
+  }
+
+   else{
+
+    Swal.close();
+  }
+  
+ }, [status]);
+
+  useEffect(() => {
+
+      onAuthStateChanged(FirebaseAuth, async(user) => {
+
+       if(!user){
+        return dispatch(logout())
+
+       }
+       else{
+
+        const {uid,email, displayName, photoURL} =user
+
+        dispatch(login({uid,email, displayName, photoURL}))
+
+       }
+
+      });
+
+    
+  }, [status]);
+
+
   return (
 
       <main className="App" ><Box sx={{ display: 'flex' }}>
@@ -59,7 +118,7 @@ function App() {
           <DisplayHeader isLoggedIn={isNavbarHidden}/>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
               <AuthProvider>
-
+{/* 
                 <Routes> 
                     <Route path="/" element={<Layout/>}>
 
@@ -76,7 +135,19 @@ function App() {
 
                     </Route>
                     <Route  path="*" isPrivate={true} element={<PageNotFound />} />
+                </Routes> */}
+
+
+                <Routes>
+                  { 
+                    (status ==='authenticated')
+                    ?<Route path="/*" element={<PrivateRoute/>}/>
+                    :<Route path="/auth/*" element={<PrivateRoute/>}/>
+                  }
+
                 </Routes>
+                                  
+
 
                 
               </AuthProvider>

@@ -19,6 +19,8 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import { AuthContext } from '../../../Context/AuthContext/AuthContext';
+import { useSelect } from '@mui/base';
+import { useSelector } from 'react-redux';
 
 const drawerWidth = 240;
 
@@ -95,7 +97,8 @@ const theme = useTheme();
 const [open, setOpen] = React.useState(false);
 const navigate = useNavigate();
 
-let userLoinginTrue = localStorage.getItem('User');
+const {status} = useSelector(store => store.auth)
+
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   
@@ -144,7 +147,7 @@ let userLoinginTrue = localStorage.getItem('User');
           
 
             <div>
-              {userLoinginTrue ?
+              {status ==='authenticated' ?
               <>
               <IconButton
                 size="large"
