@@ -17,7 +17,7 @@ const PublicRoute = ({children}) => {
        // not-authenticated //checking //authenticated
   
 
-    return (status !== 'authenticated'   ? <Outlet/> : <Navigate to="/home"/>)   ;
+    return (status === 'not-authenticated'   ? <Outlet/> : <Navigate to="/home"/>)   ;
 }
 
 export default PublicRoute;

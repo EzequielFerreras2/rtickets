@@ -5,7 +5,7 @@ name: 'auth',
 
 initialState: {
 
-    status:'not-authenticated', // not-authenticated //checking //authenticated
+    status:'checking', // not-authenticated //checking //authenticated
     uid: null,
     email:null,
     displayName: null,
