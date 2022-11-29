@@ -50,6 +50,11 @@ const schema = yup.object().shape({
  
 });
 
+const onClickLogin =() =>{
+
+  navegate('auth/register')
+
+}
 
 const { register, handleSubmit, watch, formState: { errors }, reset } = useForm({
   resolver: yupResolver(schema),
@@ -160,13 +165,9 @@ const onGoogleSingIn =()=>{
                   
 
                     <Grid container>
-                      <Grid item xs>
-                        <Link to='/register' variant="body2">
-                          {"Olvidaste Tu Contraseña?"}
-                        </Link>
-                      </Grid>
+                      
                       <Grid item>
-                        <Link to='/register' variant="body2">
+                        <Link to="register"  variant="body2">
                           {"No tienes cuenta? Registrate"}
                         </Link>
                       </Grid>

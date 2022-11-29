@@ -1,7 +1,7 @@
 import { CssBaseline } from "@mui/material";
 import { Box } from "@mui/system";
 import {useEffect, useState } from "react";
-import {Route, Routes} from "react-router-dom";
+import { Route, Routes, useNavigate} from "react-router-dom";
 import PrivateRoute from "./Router/PrivateRoute";
 import AuthProvider from "./Context/AuthContext/AtuhProvider"
 import Header from "./Components/Common/NavMenu/Header";
@@ -10,12 +10,13 @@ import Swal from "sweetalert2";
 import { onAuthStateChanged } from "firebase/auth";
 import { FirebaseAuth } from "./firebase/config";
 import { login, logout } from "./store/slices/auth";
+import PublicRoute from './Router/PublicRoute'
 
 function App() {
 var [isNavbarHidden, setIsNavbarHidden] = useState(false);
 const dispatch = useDispatch();
 const {status } = useSelector(state => state.auth);
-
+const navigate =useNavigate
 
   const DisplayHeader= (props) =>{
     const isLoggedIn = props.isLoggedIn;
@@ -31,6 +32,11 @@ const {status } = useSelector(state => state.auth);
     updateNavbar();
  
   }, [status]);
+
+
+  
+  
+
 
 
   const updateNavbar =()=>{
@@ -118,9 +124,9 @@ const {status } = useSelector(state => state.auth);
                   { 
                     (status ==='authenticated')
                     ?<Route path="/*" element={<PrivateRoute setNavbar={() =>updateNavbar()}/>}/>
-                    :<Route  element={<PrivateRoute setNavbar={() =>updateNavbar()}/>}/>
+                    :<Route  path="/*" element={<PublicRoute setNavbar={() =>updateNavbar()}/>}/>
                   }
-
+                  
 
 
                   

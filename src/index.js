@@ -16,9 +16,9 @@ root.render(
       <AtuhProvider>
         <ThemeProvider theme={dashboardTheme}>
           <BrowserRouter>
-            <Routes>
-              <Route path='/*' element={<App />}/>
-            </Routes>
+            
+              <App />
+            
           </BrowserRouter>
         </ThemeProvider>
       </AtuhProvider>

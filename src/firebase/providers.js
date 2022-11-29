@@ -27,7 +27,9 @@ export const singInWhithGoogle = async() =>{
 
     return{
         ok:false,
-        errorMessage
+        errorMessage,
+        errorCode,
+        credential
           }
     
     }
@@ -53,7 +55,7 @@ export const singInWhithGoogle = async() =>{
             errorMessage:error.message
               }
     }
- }
+ };
 
 export const registerUserWithPassword = async({email,password,displayName} )=>{
 
@@ -78,6 +80,14 @@ export const registerUserWithPassword = async({email,password,displayName} )=>{
             errorMessage:error.message
               }   
     }
+
+
+};
+
+
+export const logoutFirebase = async()=>{
+
+    return await FirebaseAuth.signOut();
 
 
 }

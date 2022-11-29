@@ -16,9 +16,8 @@ import Menu from "@mui/material/Menu";
 import { useNavigate } from 'react-router-dom';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import { AuthContext } from '../../../Context/AuthContext/AuthContext';
-import { useSelector } from 'react-redux';
-
+import { useDispatch, useSelector } from 'react-redux';
+import {startLogout} from '../../../store/slices/auth/thunks'
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -89,12 +88,13 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 
 const Header = () => {
-const {logout} = React.useContext(AuthContext);
 const theme = useTheme();
 const [open, setOpen] = React.useState(false);
 const navigate = useNavigate();
 const {status} = useSelector(store => store.auth)
 const [anchorEl, setAnchorEl] = React.useState(null);
+const dispatch = useDispatch();
+
   
   const openMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -110,10 +110,15 @@ const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleLogout = () =>{
     
-    logout();
-    navigate('/login')
+    // logout();
+    // navigate('/login')
     console.log("LogOut")
-    window.location.reload();
+    // window.location.reload();
+
+
+    dispatch( startLogout())
+
+
   };
 
   const handleDrawerOpen = () => {

@@ -12,9 +12,8 @@ const PublicRoute = (updateNavbar) => {
     return(
 
         <Routes>
-            <Route path="/login" isPrivate={false} element={<Login setNavbar={() =>updateNavbar()}/>}/>
-            <Route path="/register" element={<Register/>}/>
-            <Route path='*' element={<PageNotFound/>}/>
+            <Route path="login" isPrivate={false} element={<Login setNavbar={() =>updateNavbar()}/>}/>
+            <Route path="register" element={<Register/>}/>
         </Routes>
     )
 }
