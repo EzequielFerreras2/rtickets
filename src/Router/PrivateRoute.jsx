@@ -1,11 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Navigate, Outlet, Route, Routes} from 'react-router-dom';
-import Account from '../Components/Auth/Account/Account';
-import AdminDashboard from '../Components/DashBoard/AdminDashBoard/AdminDashboard';
-import Home from '../Components/DashBoard/Home';
-import UserDashBoard from '../Components/DashBoard/UserDashBoard/UserDashBoard';
-import PageNotFound from '../Components/PageNotFound/PageNotFound';
+import { Navigate, Outlet,} from 'react-router-dom';
+
 
 
 const PrivateRoute = (updateNavbar) => {

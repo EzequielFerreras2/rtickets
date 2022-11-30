@@ -16,9 +16,11 @@ import Login from "./Components/Auth/Login/Login";
 import Home from "./Components/DashBoard/Home";
 import AdminDashboard from "./Components/DashBoard/AdminDashBoard/AdminDashboard";
 import UserDashBoard from "./Components/DashBoard/UserDashBoard/UserDashBoard";
-import PageNotFound from "./Components/PageNotFound/PageNotFound";
 import Register from "./Components/Auth/Register/Register"
 import Account from "./Components/Auth/Account/Account";
+
+
+
 function App() {
 var [isNavbarHidden, setIsNavbarHidden] = useState(false);
 const dispatch = useDispatch();
@@ -38,12 +40,8 @@ const {status } = useSelector(state => state.auth);
 
     updateNavbar();
  
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
-
-
-  
-  
-
 
 
   const updateNavbar =()=>{
@@ -97,6 +95,7 @@ const {status } = useSelector(state => state.auth);
       });
 
     
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
