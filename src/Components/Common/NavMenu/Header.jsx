@@ -170,7 +170,7 @@ const [openAccountModal,setOpenAccountModal]=React.useState(false);
                 startIcon={ 
                   photoURL
                   ? 
-                  <Avatar alt={name} src={photoURL} sx={{ width: 30, height: 30 }}/>
+                  <Avatar alt={name} src={photoURL} />
                   :
                   <Avatar sx={{ width: 30, height: 30, }}>{name}</Avatar>
                 }
