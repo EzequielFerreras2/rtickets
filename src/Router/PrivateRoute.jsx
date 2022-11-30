@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes} from 'react-router-dom';
+import { Navigate, Route, Routes} from 'react-router-dom';
 import Account from '../Components/Auth/Account/Account';
 import AdminDashboard from '../Components/DashBoard/AdminDashBoard/AdminDashboard';
 import Home from '../Components/DashBoard/Home';
@@ -22,6 +22,7 @@ const PrivateRoute = (updateNavbar) => {
             <Route path="/userdashboard" element={<UserDashBoard />}/>
             <Route path="/account" element={<Account/>}/>
             <Route path="/" element={<Home/>}/>
+            <Route path="/*" element={<Navigate to="/"/>}/>
             {/* <Route path='*' element={<PageNotFound/>}/> */}
             
         </Routes>

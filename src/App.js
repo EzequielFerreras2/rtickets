@@ -1,7 +1,7 @@
 import { CssBaseline } from "@mui/material";
 import { Box } from "@mui/system";
 import {useEffect, useState } from "react";
-import { Route, Routes, useNavigate} from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate} from "react-router-dom";
 import PrivateRoute from "./Router/PrivateRoute";
 import AuthProvider from "./Context/AuthContext/AtuhProvider"
 import Header from "./Components/Common/NavMenu/Header";
@@ -11,6 +11,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { FirebaseAuth } from "./firebase/config";
 import { login, logout } from "./store/slices/auth";
 import PublicRoute from './Router/PublicRoute'
+import Login from "./Components/Auth/Login/Login";
 
 function App() {
 var [isNavbarHidden, setIsNavbarHidden] = useState(false);
@@ -123,12 +124,12 @@ const navigate =useNavigate
                 <Routes>
                   { 
                     (status ==='authenticated')
-                    ?<Route path="/*" element={<PrivateRoute setNavbar={() =>updateNavbar()}/>}/>
+                    ?<Route path="/auth/*" element={<PrivateRoute setNavbar={() =>updateNavbar()}/>}/>
                     :<Route  path="/*" element={<PublicRoute setNavbar={() =>updateNavbar()}/>}/>
                   }
                   
 
-
+                  <Route path='/*' element={<Navigate to="/auth/login"/>}/>
                   
                   
                 </Routes>
