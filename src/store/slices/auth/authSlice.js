@@ -25,7 +25,7 @@ initialState: {
         state.displayName= payload.displayName;
         state.photoURL= payload.photoURL;
         state.errorMessage= null;
-       state.providerId=payload.providerId;
+        state.providerId=payload.providerId;
     
 
     },
