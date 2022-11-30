@@ -11,6 +11,7 @@ initialState: {
     displayName: null,
     photoURL: null,
     errorMessage: null,
+    providerId:null,
 
 
  },
@@ -24,6 +25,7 @@ initialState: {
         state.displayName= payload.displayName;
         state.photoURL= payload.photoURL;
         state.errorMessage= null;
+       state.providerId=payload.providerId;
     
 
     },

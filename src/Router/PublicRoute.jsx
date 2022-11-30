@@ -1,24 +1,21 @@
 import React from 'react';
-import { Navigate, Route, Routes} from 'react-router-dom';
-import Login from '../Components/Auth/Login/Login'
-import Register from '../Components/Auth/Register/Register'
-import PageNotFound from '../Components/PageNotFound/PageNotFound';
+import { useSelector } from 'react-redux';
+import { Navigate, Outlet, } from 'react-router-dom';
+
 const PublicRoute = (updateNavbar) => {
-    // const  status = localStorage.getItem('status');
+    
+    const {status} =useSelector(store => store.auth)
 
-    //    // not-authenticated //checking //authenticated
-    // return (status !== 'Authenticated'   ? <Outlet/> : <Navigate to="/home"/>)   ;
+       // not-authenticated //checking //authenticated
+    return (status === 'checking' || status === 'not-authenticated'  ? <Outlet/> : <Navigate to="/home"/>)   ;
 
-    return(
+    // return(
 
-        <Routes>
-            <Route path="login" isPrivate={false} element={<Login setNavbar={() =>updateNavbar()}/>}/>
-            <Route path="register" element={<Register/>}/>
-
-            <Route path='/*' element={<Navigate to="/auth/login"/>}/>
-            
-        </Routes>
-    )
+    //     <Routes>
+    //         <Route path="login" isPrivate={false} element={<Login setNavbar={() =>updateNavbar()}/>}/>
+    //         <Route path="register" element={<Register/>}/>
+    //     </Routes>
+    // )
 }
 
 export default PublicRoute; 

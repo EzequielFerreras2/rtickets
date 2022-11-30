@@ -1,7 +1,7 @@
 import { CssBaseline } from "@mui/material";
 import { Box } from "@mui/system";
 import {useEffect, useState } from "react";
-import { Navigate, Route, Routes, useNavigate} from "react-router-dom";
+import { Navigate, Route, Routes} from "react-router-dom";
 import PrivateRoute from "./Router/PrivateRoute";
 import AuthProvider from "./Context/AuthContext/AtuhProvider"
 import Header from "./Components/Common/NavMenu/Header";
@@ -11,13 +11,21 @@ import { onAuthStateChanged } from "firebase/auth";
 import { FirebaseAuth } from "./firebase/config";
 import { login, logout } from "./store/slices/auth";
 import PublicRoute from './Router/PublicRoute'
+import Layout from "./Layout";
 import Login from "./Components/Auth/Login/Login";
+import Home from "./Components/DashBoard/Home";
+import AdminDashboard from "./Components/DashBoard/AdminDashBoard/AdminDashboard";
+import UserDashBoard from "./Components/DashBoard/UserDashBoard/UserDashBoard";
+import Register from "./Components/Auth/Register/Register"
+import Account from "./Components/Auth/Account/Account";
+
+
 
 function App() {
 var [isNavbarHidden, setIsNavbarHidden] = useState(false);
 const dispatch = useDispatch();
 const {status } = useSelector(state => state.auth);
-const navigate =useNavigate
+
 
   const DisplayHeader= (props) =>{
     const isLoggedIn = props.isLoggedIn;
@@ -32,22 +40,17 @@ const navigate =useNavigate
 
     updateNavbar();
  
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status]);
 
 
-  
-  
-
-
-
   const updateNavbar =()=>{
-  if (status !== 'authenticated'){
+  if (status === 'checking' || status === 'not-authenticated'){
     setIsNavbarHidden (true);
   }
   else{
     setIsNavbarHidden (false);
   }
-    
   }
 
 
@@ -91,6 +94,7 @@ const navigate =useNavigate
       });
 
     
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
@@ -101,27 +105,30 @@ const navigate =useNavigate
           <DisplayHeader isLoggedIn={isNavbarHidden}/>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
               <AuthProvider>
-{/* 
+
                 <Routes> 
                     <Route path="/" element={<Layout/>}>
 
                       <Route element={<PublicRoute/>}>
                         <Route path="/login" isPrivate={false} element={<Login setNavbar={() =>updateNavbar()}/>}/>
                         <Route path="/register" element={<Register/>}/>
+                        
                       </Route>
                          
                       <Route element={<PrivateRoute/>}>
                         <Route path="/home" element={<Home setNavbar={() =>updateNavbar()}/>}/>
                         <Route path="/admindashboard" element={<AdminDashboard />}/>
                         <Route path="/userdashboard" element={<UserDashBoard />}/>
+                        <Route path="/account" element={<Account/>}/>
+                       
                       </Route>
 
+                      <Route  path="*" isPrivate={true} element={ status === 'authenticated' ? <Navigate to="/home"/> : <Navigate to="/login"/>} />
                     </Route>
-                    <Route  path="*" isPrivate={true} element={<PageNotFound />} />
-                </Routes> */}
+                </Routes>
 
 
-                <Routes>
+                {/* <Routes>
                   { 
                     (status ==='authenticated')
                     ?<Route path="/auth/*" element={<PrivateRoute setNavbar={() =>updateNavbar()}/>}/>
@@ -133,7 +140,7 @@ const navigate =useNavigate
                   
                   
                 </Routes>
-                                  
+                                   */}
 
 
                 

@@ -9,9 +9,8 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { AuthContext } from '../../../Context/AuthContext/AuthContext';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2'
 import GoogleIcon from '@mui/icons-material/Google';
 import { useDispatch, useSelector } from 'react-redux';
@@ -37,9 +36,6 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Login({setNavbar}) {
-
-const {login,logout} = React.useContext(AuthContext);
-const navegate = useNavigate();
 const dispatch = useDispatch();
 const  {status,errorMessage} = useSelector((state) => state.auth);
 const isAuthenticating = React.useMemo( ()=> status ==='checking', [status]);
@@ -50,13 +46,9 @@ const schema = yup.object().shape({
  
 });
 
-const onClickLogin =() =>{
 
-  navegate('auth/register')
 
-}
-
-const { register, handleSubmit, watch, formState: { errors }, reset } = useForm({
+const { register, handleSubmit, formState: { errors },  } = useForm({
   resolver: yupResolver(schema),
 });
 
@@ -83,7 +75,7 @@ const onGoogleSingIn =()=>{
 <ThemeProvider theme={theme}>
 
     <Box style={{position: 'absolute', left: '50%', top: '50%',transform: 'translate(-50%, -50%)'}}
-    display="flex"justifyContent="center"alignItems="center">
+    display="flex"justifyContent="center"alignItems="center" >
 
       <Grid container justify = "center" component="main" sx={{ height: '55vh', width: '120vh' }}>
               <CssBaseline />

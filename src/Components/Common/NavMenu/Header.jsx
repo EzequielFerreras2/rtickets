@@ -13,11 +13,13 @@ import SideBar from './SideBar';
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import { useNavigate } from 'react-router-dom';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { useDispatch, useSelector } from 'react-redux';
 import {startLogout} from '../../../store/slices/auth/thunks'
+import { Avatar, Button } from '@mui/material';
+import AccountModal from '../../Auth/Account/AccountModal';
+
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -90,10 +92,12 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const Header = () => {
 const theme = useTheme();
 const [open, setOpen] = React.useState(false);
-const navigate = useNavigate();
-const {status} = useSelector(store => store.auth)
+const {status,displayName,photoURL} = useSelector(store => store.auth)
 const [anchorEl, setAnchorEl] = React.useState(null);
 const dispatch = useDispatch();
+const name= displayName?.charAt(0);
+const [openAccountModal,setOpenAccountModal]=React.useState(false);
+
 
   
   const openMenu = (event) => {
@@ -105,7 +109,9 @@ const dispatch = useDispatch();
 
   const handleAccount =() =>{
 
-    navigate('/account')
+    setOpenAccountModal(true);
+    handleClose();
+
   }
 
   const handleLogout = () =>{
@@ -153,16 +159,25 @@ const dispatch = useDispatch();
             <div>
               {status ==='authenticated' ?
               <>
-              <IconButton
+              <Button
                 size="large"
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={openMenu}
                 color="inherit"
+                startIcon={ 
+                  photoURL
+                  ? 
+                  <Avatar alt="Remy Sharp" src={photoURL} sx={{ width: 30, height: 30 }}/>
+                  :
+                  <Avatar sx={{ width: 30, height: 30, }}>{name}</Avatar>
+                }
+                
               >
-              <AccountCircle />
-              </IconButton>
+                {displayName ? displayName : 'User' }
+
+              </Button>
               
               
                     <Menu
@@ -179,12 +194,11 @@ const dispatch = useDispatch();
                     }}
                     open={Boolean(anchorEl)}
                     onClose={handleClose}
+                    
                   >
-               
-                
-                  <MenuItem onClick={()=>handleAccount()} style={{ textDecoration: 'none' , color: 'black'}}><AccountBoxIcon/> Usuario</MenuItem>
-                
-                  <MenuItem onClick={handleLogout} style={{ textDecoration: 'none' , color: 'black'}} ><LogoutIcon/> Logout</MenuItem>
+            
+                    <MenuItem onClick={()=>handleAccount()} style={{ textDecoration: 'none' , color: 'black'}}><AccountBoxIcon/> Mi Cuenta</MenuItem>
+                    <MenuItem onClick={handleLogout} style={{ textDecoration: 'none' , color: 'black'}} ><LogoutIcon/> Logout</MenuItem>
                     
                   </Menu>
               </>     
@@ -207,6 +221,12 @@ const dispatch = useDispatch();
        <SideBar open={open}/>
        <DrawerHeader />
       </Drawer>
+
+          <AccountModal
+          open={openAccountModal} 
+          onClose={()=> setOpenAccountModal()} 
+          />
+      
       </div>
     );
   };
