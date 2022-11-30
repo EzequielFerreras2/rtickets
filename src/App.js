@@ -1,7 +1,7 @@
 import { CssBaseline } from "@mui/material";
 import { Box } from "@mui/system";
 import {useEffect, useState } from "react";
-import { Route, Routes, useNavigate} from "react-router-dom";
+import { Navigate, Route, Routes} from "react-router-dom";
 import PrivateRoute from "./Router/PrivateRoute";
 import AuthProvider from "./Context/AuthContext/AtuhProvider"
 import Header from "./Components/Common/NavMenu/Header";
@@ -23,7 +23,7 @@ function App() {
 var [isNavbarHidden, setIsNavbarHidden] = useState(false);
 const dispatch = useDispatch();
 const {status } = useSelector(state => state.auth);
-const navigate =useNavigate
+
 
   const DisplayHeader= (props) =>{
     const isLoggedIn = props.isLoggedIn;
@@ -114,6 +114,7 @@ const navigate =useNavigate
                       <Route element={<PublicRoute/>}>
                         <Route path="/login" isPrivate={false} element={<Login setNavbar={() =>updateNavbar()}/>}/>
                         <Route path="/register" element={<Register/>}/>
+                        
                       </Route>
                          
                       <Route element={<PrivateRoute/>}>
@@ -121,10 +122,13 @@ const navigate =useNavigate
                         <Route path="/admindashboard" element={<AdminDashboard />}/>
                         <Route path="/userdashboard" element={<UserDashBoard />}/>
                         <Route path="/account" element={<Account/>}/>
+                       
                       </Route>
 
+                      <Route  path="*" isPrivate={true} element={ status === 'authenticated' ? <Navigate to="/home"/> : <Navigate to="/login"/>} />
                     </Route>
-                    <Route  path="*" isPrivate={true} element={<PageNotFound />} />
+                    
+                    
                 </Routes>
 
 

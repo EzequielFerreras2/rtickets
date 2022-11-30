@@ -18,6 +18,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { useDispatch, useSelector } from 'react-redux';
 import {startLogout} from '../../../store/slices/auth/thunks'
+import { Button } from '@mui/material';
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -153,18 +154,19 @@ const dispatch = useDispatch();
             <div>
               {status ==='authenticated' ?
               <>
-              <IconButton
+              <Button
                 size="large"
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={openMenu}
                 color="inherit"
+                startIcon={<AccountCircle />}
                 
               >
-              <AccountCircle />
-                
-              </IconButton>
+                {displayName ? displayName : 'User' }
+
+              </Button>
               
               
                     <Menu
