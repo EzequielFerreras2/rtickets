@@ -17,7 +17,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { useDispatch, useSelector } from 'react-redux';
 import {startLogout} from '../../../store/slices/auth/thunks'
-import { Button } from '@mui/material';
+import { Avatar, Button } from '@mui/material';
 import AccountModal from '../../Auth/Account/AccountModal';
 
 const drawerWidth = 240;
@@ -92,11 +92,10 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const Header = () => {
 const theme = useTheme();
 const [open, setOpen] = React.useState(false);
-
-const {status,displayName} = useSelector(store => store.auth)
+const {status,displayName,photoURL} = useSelector(store => store.auth)
 const [anchorEl, setAnchorEl] = React.useState(null);
 const dispatch = useDispatch();
-
+const name= displayName?.charAt(0);
 const [openAccountModal,setOpenAccountModal]=React.useState(false);
 
 
@@ -167,7 +166,13 @@ const [openAccountModal,setOpenAccountModal]=React.useState(false);
                 aria-haspopup="true"
                 onClick={openMenu}
                 color="inherit"
-                startIcon={<AccountCircle />}
+                startIcon={ 
+                  photoURL
+                  ? 
+                  <Avatar alt="Remy Sharp" src={photoURL} sx={{ width: 30, height: 30 }}/>
+                  :
+                  <Avatar sx={{ width: 30, height: 30, }}>{name}</Avatar>
+                }
                 
               >
                 {displayName ? displayName : 'User' }
@@ -191,11 +196,9 @@ const [openAccountModal,setOpenAccountModal]=React.useState(false);
                     onClose={handleClose}
                     
                   >
-                    
-                
-                  <MenuItem onClick={()=>handleAccount()} style={{ textDecoration: 'none' , color: 'black'}}><AccountBoxIcon/> Mi Cuenta</MenuItem>
-                
-                  <MenuItem onClick={handleLogout} style={{ textDecoration: 'none' , color: 'black'}} ><LogoutIcon/> Logout</MenuItem>
+            
+                    <MenuItem onClick={()=>handleAccount()} style={{ textDecoration: 'none' , color: 'black'}}><AccountBoxIcon/> Mi Cuenta</MenuItem>
+                    <MenuItem onClick={handleLogout} style={{ textDecoration: 'none' , color: 'black'}} ><LogoutIcon/> Logout</MenuItem>
                     
                   </Menu>
               </>     

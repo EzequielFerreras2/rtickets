@@ -24,13 +24,7 @@ const BasicModal = ({open, onClose, title, subTitle, content, onSubmit} ) => {
                 </Typography>
                  {content}
                 <Box sx={modalStyles.buttons}>
-                    <Button
-                        variant="contained"
-                        onClick={onSubmit}
-                    >
-                        Aceptar
-                    </Button>
-                    <Button onClick={onClose}>Cancelar</Button>
+                    <Button variant="contained" onClick={onClose}>Salir</Button>
                 </Box>
             </Box>
         </Modal>

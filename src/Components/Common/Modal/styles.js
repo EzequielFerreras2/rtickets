@@ -9,6 +9,7 @@ export const modalStyles = {
         bgcolor: 'background.paper',
         boxShadow: 24,
         p: 4,
+        
     },
     inputFields: {
         display: 'flex',
@@ -18,10 +19,11 @@ export const modalStyles = {
         '.MuiInput-root': {
             marginBottom: '20px',
         },
+        
     },
     buttons: {
         display: 'flex',
-        justifyContent: 'end',
+        justifyContent: 'center',
     }
 };
 
