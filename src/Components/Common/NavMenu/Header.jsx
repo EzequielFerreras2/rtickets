@@ -96,6 +96,7 @@ const {status,displayName,photoURL} = useSelector(store => store.auth)
 const [anchorEl, setAnchorEl] = React.useState(null);
 const dispatch = useDispatch();
 const name= displayName?.charAt(0);
+console.log(name)
 const [openAccountModal,setOpenAccountModal]=React.useState(false);
 
 
@@ -169,7 +170,7 @@ const [openAccountModal,setOpenAccountModal]=React.useState(false);
                 startIcon={ 
                   photoURL
                   ? 
-                  <Avatar alt="Remy Sharp" src={photoURL} sx={{ width: 30, height: 30 }}/>
+                  <Avatar alt={name} src={photoURL} sx={{ width: 30, height: 30 }}/>
                   :
                   <Avatar sx={{ width: 30, height: 30, }}>{name}</Avatar>
                 }
