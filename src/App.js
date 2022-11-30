@@ -45,13 +45,12 @@ const {status } = useSelector(state => state.auth);
 
 
   const updateNavbar =()=>{
-  if (status !== 'authenticated'){
+  if (status === 'checking' || status === 'not-authenticated'){
     setIsNavbarHidden (true);
   }
   else{
     setIsNavbarHidden (false);
   }
-    
   }
 
 
@@ -126,8 +125,6 @@ const {status } = useSelector(state => state.auth);
 
                       <Route  path="*" isPrivate={true} element={ status === 'authenticated' ? <Navigate to="/home"/> : <Navigate to="/login"/>} />
                     </Route>
-                    
-                    
                 </Routes>
 
 

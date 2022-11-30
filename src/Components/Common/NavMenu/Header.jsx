@@ -13,12 +13,13 @@ import SideBar from './SideBar';
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import { useNavigate } from 'react-router-dom';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { useDispatch, useSelector } from 'react-redux';
 import {startLogout} from '../../../store/slices/auth/thunks'
 import { Button } from '@mui/material';
+import AccountModal from '../../Auth/Account/AccountModal';
+
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -91,10 +92,13 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const Header = () => {
 const theme = useTheme();
 const [open, setOpen] = React.useState(false);
-const navigate = useNavigate();
+
 const {status,displayName} = useSelector(store => store.auth)
 const [anchorEl, setAnchorEl] = React.useState(null);
 const dispatch = useDispatch();
+
+const [openAccountModal,setOpenAccountModal]=React.useState(false);
+
 
   
   const openMenu = (event) => {
@@ -106,7 +110,9 @@ const dispatch = useDispatch();
 
   const handleAccount =() =>{
 
-    navigate('/account')
+    setOpenAccountModal(true);
+    handleClose();
+
   }
 
   const handleLogout = () =>{
@@ -212,6 +218,12 @@ const dispatch = useDispatch();
        <SideBar open={open}/>
        <DrawerHeader />
       </Drawer>
+
+          <AccountModal
+          open={openAccountModal} 
+          onClose={()=> setOpenAccountModal()} 
+          />
+      
       </div>
     );
   };
