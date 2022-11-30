@@ -1,5 +1,6 @@
 import React from 'react';
-import { Route, Routes} from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Navigate, Outlet, Route, Routes} from 'react-router-dom';
 import Account from '../Components/Auth/Account/Account';
 import AdminDashboard from '../Components/DashBoard/AdminDashBoard/AdminDashboard';
 import Home from '../Components/DashBoard/Home';
@@ -9,23 +10,28 @@ import PageNotFound from '../Components/PageNotFound/PageNotFound';
 
 const PrivateRoute = (updateNavbar) => {
 
-    // const  status = localStorage.getItem('status');
+    const {status} =useSelector(store => store.auth)
 
-    // return (status === 'authenticated' ? <Outlet/> : <Navigate to="/login"/>)   ;
+    return (
+        
+        status === 'authenticated' ? <Outlet/> : <Navigate to="/login"/>
+        
+    
+    )   ;
 
-    return(
+    // return(
 
-        <Routes>
+    //     <Routes>
             
-            <Route path="/home" element={<Home setNavbar={() =>updateNavbar()}/>}/>
-            <Route path="/admindashboard" element={<AdminDashboard />}/>
-            <Route path="/userdashboard" element={<UserDashBoard />}/>
-            <Route path="/account" element={<Account/>}/>
-            <Route path="/" element={<Home/>}/>
-            {/* <Route path='*' element={<PageNotFound/>}/> */}
+    //         <Route path="/home" element={<Home setNavbar={() =>updateNavbar()}/>}/>
+    //         <Route path="/admindashboard" element={<AdminDashboard />}/>
+    //         <Route path="/userdashboard" element={<UserDashBoard />}/>
+    //         
+    //         <Route path="/" element={<Home/>}/>
+    //         {/* <Route path='*' element={<PageNotFound/>}/> */}
             
-        </Routes>
-    )
+    //     </Routes>
+    // )
 }
 
 export default PrivateRoute;

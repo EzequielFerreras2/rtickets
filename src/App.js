@@ -11,7 +11,14 @@ import { onAuthStateChanged } from "firebase/auth";
 import { FirebaseAuth } from "./firebase/config";
 import { login, logout } from "./store/slices/auth";
 import PublicRoute from './Router/PublicRoute'
-
+import Layout from "./Layout";
+import Login from "./Components/Auth/Login/Login";
+import Home from "./Components/DashBoard/Home";
+import AdminDashboard from "./Components/DashBoard/AdminDashBoard/AdminDashboard";
+import UserDashBoard from "./Components/DashBoard/UserDashBoard/UserDashBoard";
+import PageNotFound from "./Components/PageNotFound/PageNotFound";
+import Register from "./Components/Auth/Register/Register"
+import Account from "./Components/Auth/Account/Account";
 function App() {
 var [isNavbarHidden, setIsNavbarHidden] = useState(false);
 const dispatch = useDispatch();
@@ -100,7 +107,7 @@ const navigate =useNavigate
           <DisplayHeader isLoggedIn={isNavbarHidden}/>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
               <AuthProvider>
-{/* 
+
                 <Routes> 
                     <Route path="/" element={<Layout/>}>
 
@@ -113,14 +120,15 @@ const navigate =useNavigate
                         <Route path="/home" element={<Home setNavbar={() =>updateNavbar()}/>}/>
                         <Route path="/admindashboard" element={<AdminDashboard />}/>
                         <Route path="/userdashboard" element={<UserDashBoard />}/>
+                        <Route path="/account" element={<Account/>}/>
                       </Route>
 
                     </Route>
                     <Route  path="*" isPrivate={true} element={<PageNotFound />} />
-                </Routes> */}
+                </Routes>
 
 
-                <Routes>
+                {/* <Routes>
                   { 
                     (status ==='authenticated')
                     ?<Route path="/*" element={<PrivateRoute setNavbar={() =>updateNavbar()}/>}/>
@@ -132,7 +140,7 @@ const navigate =useNavigate
                   
                   
                 </Routes>
-                                  
+                                   */}
 
 
                 

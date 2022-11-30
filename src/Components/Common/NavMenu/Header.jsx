@@ -91,7 +91,7 @@ const Header = () => {
 const theme = useTheme();
 const [open, setOpen] = React.useState(false);
 const navigate = useNavigate();
-const {status} = useSelector(store => store.auth)
+const {status,displayName} = useSelector(store => store.auth)
 const [anchorEl, setAnchorEl] = React.useState(null);
 const dispatch = useDispatch();
 
@@ -160,8 +160,10 @@ const dispatch = useDispatch();
                 aria-haspopup="true"
                 onClick={openMenu}
                 color="inherit"
+                
               >
               <AccountCircle />
+                
               </IconButton>
               
               
@@ -179,10 +181,11 @@ const dispatch = useDispatch();
                     }}
                     open={Boolean(anchorEl)}
                     onClose={handleClose}
+                    
                   >
-               
+                    
                 
-                  <MenuItem onClick={()=>handleAccount()} style={{ textDecoration: 'none' , color: 'black'}}><AccountBoxIcon/> Usuario</MenuItem>
+                  <MenuItem onClick={()=>handleAccount()} style={{ textDecoration: 'none' , color: 'black'}}><AccountBoxIcon/> Mi Cuenta</MenuItem>
                 
                   <MenuItem onClick={handleLogout} style={{ textDecoration: 'none' , color: 'black'}} ><LogoutIcon/> Logout</MenuItem>
                     
