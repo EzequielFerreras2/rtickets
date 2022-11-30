@@ -10,10 +10,11 @@ export const singInWhithGoogle = async() =>{
         const result = await signInWithPopup(FirebaseAuth,googleProvider);
         // const credentials = GoogleAuthProvider.credentialFromResult(result);
         const {displayName,email,photoURL,uid} = result.user;
-       
+        const {providerId}= result;
+       console.log(result)
         return{
             ok:true,
-            displayName,email,photoURL,uid
+            displayName,email,photoURL,uid,providerId
               }
     }
     catch(error)
@@ -41,10 +42,11 @@ export const singInWhithGoogle = async() =>{
     {
         const result= await signInWithEmailAndPassword(FirebaseAuth, email,password);
         const {uid,photoURL,displayName}=result.user;
-
+        const {providerId}= result;
+        console.log(result)
         return{
             ok:true,
-            uid,photoURL,displayName
+            uid,photoURL,displayName,providerId
               }
     } 
     
@@ -63,12 +65,13 @@ export const registerUserWithPassword = async({email,password,displayName} )=>{
     {
        const resp = await createUserWithEmailAndPassword(FirebaseAuth,email,password)
        const {uid,photoURL}= resp.user
+       const {providerId}= resp;
        await updateProfile(FirebaseAuth.currentUser,{ displayName})
 
 
        return{
         ok:true,
-        uid,photoURL, email, displayName
+        uid,photoURL, email, displayName,providerId
              }
 
 

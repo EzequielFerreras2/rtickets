@@ -6,7 +6,7 @@ import BasicModal from '../../Common/Modal/BasicModal';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 const AccountModal = ({open =false, onClose}) => {
 
-    const {uid,photoURL, email, displayName} = useSelector(store => store.auth)
+    const {uid,photoURL, email, displayName,providerId} = useSelector(store => store.auth)
 
     const name= displayName?.charAt(0);
 
@@ -47,8 +47,11 @@ const AccountModal = ({open =false, onClose}) => {
                     <Grid container justifyContent="center"  alignItems="center" item xs={12}>
                          <Typography>{email}</Typography>
                     </Grid>
-                    <Grid container justifyContent="center"  alignItems="center" item xs={12} >
-                            
+                    {
+                        providerId
+                        ? 
+                        null:
+                        <Grid container justifyContent="center"  alignItems="center" item xs={12} >
                         <Accordion  >
                                     <AccordionSummary
                                     expandIcon={<ExpandMoreIcon />}
@@ -80,6 +83,9 @@ const AccountModal = ({open =false, onClose}) => {
                         </Accordion>
                             
                     </Grid>
+
+                    }
+                    
                 </Box>
         </Grid>
     );

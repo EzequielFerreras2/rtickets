@@ -18,6 +18,7 @@ export const startGoogleSingIn =() =>{
 
         dispatch(chekingCredentials());
         const results = await singInWhithGoogle();
+        console.log(results)
         
         if(!results.ok)
         {
@@ -40,7 +41,7 @@ export const startLogi =({email,password}) =>{
         dispatch(chekingCredentials());
 
         const results =await singInWhithEmailPassword({email,password})
-
+        console.log(results)
 
         if(!results.ok)
         {
@@ -59,14 +60,14 @@ export const startCreatingUserWithEmailPassword =({email,password,displayName})=
     return async(dispatch)=>{
 
       dispatch(chekingCredentials());
-      const {ok,uid,photoURL,errorMessage} = await registerUserWithPassword({email,password,displayName});
-
+      const {ok,uid,photoURL,errorMessage,providerId} = await registerUserWithPassword({email,password,displayName});
+        console.log(ok,uid,photoURL,errorMessage,providerId)
 
       if(!ok){
         dispatch(logout({errorMessage}))
       }
       else{
-         dispatch(login({uid,displayName,email,photoURL}))
+         dispatch(login({uid,displayName,email,photoURL,providerId}))
          
       }
         
