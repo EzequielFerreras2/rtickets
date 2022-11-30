@@ -13,13 +13,11 @@ import SideBar from './SideBar';
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
-import {Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
-import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-import { AuthContext } from '../../../Context/AuthContext/AuthContext';
-
+import { useDispatch, useSelector } from 'react-redux';
+import {startLogout} from '../../../store/slices/auth/thunks'
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -90,14 +88,13 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 
 const Header = () => {
-  const {logout} = React.useContext(AuthContext);
 const theme = useTheme();
 const [open, setOpen] = React.useState(false);
 const navigate = useNavigate();
+const {status} = useSelector(store => store.auth)
+const [anchorEl, setAnchorEl] = React.useState(null);
+const dispatch = useDispatch();
 
-let userLoinginTrue = localStorage.getItem('User');
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
   
   const openMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -106,12 +103,22 @@ let userLoinginTrue = localStorage.getItem('User');
     setAnchorEl(null);
   };
 
+  const handleAccount =() =>{
+
+    navigate('/account')
+  }
+
   const handleLogout = () =>{
     
-    logout();
-    navigate('/login')
+    // logout();
+    // navigate('/login')
     console.log("LogOut")
-    window.location.reload();
+    // window.location.reload();
+
+
+    dispatch( startLogout())
+
+
   };
 
   const handleDrawerOpen = () => {
@@ -144,7 +151,7 @@ let userLoinginTrue = localStorage.getItem('User');
           
 
             <div>
-              {userLoinginTrue ?
+              {status ==='authenticated' ?
               <>
               <IconButton
                 size="large"
@@ -174,17 +181,13 @@ let userLoinginTrue = localStorage.getItem('User');
                     onClose={handleClose}
                   >
                
-                  <Link to='/usuario' style={{ textDecoration: 'none' , color: 'gray'}}>
-                    <MenuItem onClick={handleClose}><AccountBoxIcon/> Usuario</MenuItem>
-                  </Link>
-
+                
+                  <MenuItem onClick={()=>handleAccount()} style={{ textDecoration: 'none' , color: 'black'}}><AccountBoxIcon/> Usuario</MenuItem>
+                
                   <MenuItem onClick={handleLogout} style={{ textDecoration: 'none' , color: 'black'}} ><LogoutIcon/> Logout</MenuItem>
                     
                   </Menu>
-              </>
-              
-              
-              
+              </>     
                  :null}
 
             </div>

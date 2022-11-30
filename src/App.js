@@ -1,24 +1,22 @@
 import { CssBaseline } from "@mui/material";
 import { Box } from "@mui/system";
-import { useContext, useEffect, useState } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
-import AdminDashboard from "./Components/DashBoard/AdminDashBoard/AdminDashboard";
-import UserDashBoard from "./Components/DashBoard/UserDashBoard/UserDashBoard";
+import {useEffect, useState } from "react";
+import { Route, Routes, useNavigate} from "react-router-dom";
 import PrivateRoute from "./Router/PrivateRoute";
 import AuthProvider from "./Context/AuthContext/AtuhProvider"
 import Header from "./Components/Common/NavMenu/Header";
-import {AuthContext} from "./Context/AuthContext/AuthContext"
-import PageNotFound from "./Components/PageNotFound/PageNotFound";
-import Login from "./Components/Auth/Login/Login";
-import Home from "./Components/DashBoard/Home";
-import Layout from "./Layout"
-import PublicRoute from "./Router/PublicRoute";
-import Register from './Components/Auth/Register/Register'
-function App() {
-  var [isNavbarHidden, setIsNavbarHidden] = useState(false);
-  const {authState} = useContext(AuthContext);
- const navegate =useNavigate();
+import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
+import { onAuthStateChanged } from "firebase/auth";
+import { FirebaseAuth } from "./firebase/config";
+import { login, logout } from "./store/slices/auth";
+import PublicRoute from './Router/PublicRoute'
 
+function App() {
+var [isNavbarHidden, setIsNavbarHidden] = useState(false);
+const dispatch = useDispatch();
+const {status } = useSelector(state => state.auth);
+const navigate =useNavigate
 
   const DisplayHeader= (props) =>{
     const isLoggedIn = props.isLoggedIn;
@@ -30,26 +28,69 @@ function App() {
   }
 
   useEffect(() => {
+
     updateNavbar();
  
-  }, []);
+  }, [status]);
+
+
+  
+  
+
 
 
   const updateNavbar =()=>{
-    const user = authState.logged
-    // let user = localStorage.getItem('User')
-  // ? JSON.parse(localStorage.getItem('User')).Token
-  // : '';
-  if (user === false){
+  if (status !== 'authenticated'){
     setIsNavbarHidden (true);
-    navegate('/login')
-  }else{
+  }
+  else{
     setIsNavbarHidden (false);
-    navegate('/Home')
-   
   }
     
   }
+
+
+ useEffect(() => {
+
+  if( status === 'checking')
+  {
+    Swal.fire({
+      title: `${status}...`,
+      timerProgressBar: true,
+      allowOutsideClick: false,
+      didOpen: () => {
+          Swal.showLoading()
+      },
+  });
+  }
+
+   else
+  {
+    Swal.close();
+  }
+  
+ }, [status]);
+
+  useEffect(() => {
+
+      onAuthStateChanged(FirebaseAuth, async(user) => {
+
+       if(!user){
+        return dispatch(logout())
+
+       }
+       else{
+
+        const {uid,email, displayName, photoURL} =user
+
+        dispatch(login({uid,email, displayName, photoURL}))
+
+       }
+
+      });
+
+    
+  }, []);
 
 
   return (
@@ -59,7 +100,7 @@ function App() {
           <DisplayHeader isLoggedIn={isNavbarHidden}/>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
               <AuthProvider>
-
+{/* 
                 <Routes> 
                     <Route path="/" element={<Layout/>}>
 
@@ -76,7 +117,23 @@ function App() {
 
                     </Route>
                     <Route  path="*" isPrivate={true} element={<PageNotFound />} />
+                </Routes> */}
+
+
+                <Routes>
+                  { 
+                    (status ==='authenticated')
+                    ?<Route path="/*" element={<PrivateRoute setNavbar={() =>updateNavbar()}/>}/>
+                    :<Route  path="/*" element={<PublicRoute setNavbar={() =>updateNavbar()}/>}/>
+                  }
+                  
+
+
+                  
+                  
                 </Routes>
+                                  
+
 
                 
               </AuthProvider>

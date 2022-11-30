@@ -5,7 +5,7 @@ name: 'auth',
 
 initialState: {
 
-    status:'checking ', // not-authenticated //checking //authenticated
+    status:'checking', // not-authenticated //checking //authenticated
     uid: null,
     email:null,
     displayName: null,
@@ -36,7 +36,7 @@ initialState: {
     state.email=null;
     state.displayName= null;
     state.photoURL= null;
-    state.errorMessage= payload.errorMessage;
+    state.errorMessage= payload?.errorMessage;
 
     },
 

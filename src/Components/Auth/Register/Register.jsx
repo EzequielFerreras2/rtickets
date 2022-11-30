@@ -9,7 +9,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -46,13 +46,16 @@ export default function SignUp() {
   const dispatch = useDispatch();
   const { status, errorMessage } = useSelector( (state) => state.auth)
   const isAuthenticating = React.useMemo( ()=> status ==='checking', [status]);
-  const { register, handleSubmit, watch, formState: { errors }, reset } = useForm({
+  const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
   });
+  const navegate = useNavigate();
 
- 
- 
+  const onClickRegister =()=>{
 
+    navegate('auth/login')
+
+  }
 
   const onSubmit = (data) => {
    
@@ -69,10 +72,7 @@ export default function SignUp() {
           text: errorMessage,
         
         })
-       
-    
       }
-      
     }
 
     else
@@ -85,9 +85,6 @@ export default function SignUp() {
      
       })
     }
-    
- 
-    
   };
 
   return (
@@ -178,7 +175,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link to='/login' variant="body2">
+                <Link onClick={()=> onClickRegister()} variant="body2">
                   Ya tienes Cuenta? Sign in
                 </Link>
               </Grid>
