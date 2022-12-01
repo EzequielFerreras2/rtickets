@@ -65,9 +65,9 @@ const AccountModal = ({open =false, onClose}) => {
                                         <Box>
                                             <TextField id="oldPasword" label="Contraseña antigua" variant="outlined" />
                                             <br/>
-                                            <TextField id="newPassword" label="Nueva Contraseña" variant="outlined" />
+                                            <TextField id="newPassword" type="password" label="Nueva Contraseña" variant="outlined" />
                                             <br/>
-                                            <TextField id="confPassword" label="Confirmar Contraseña" variant="outlined" />
+                                            <TextField id="confPassword" type="password" label="Confirmar Contraseña" variant="outlined" />
                                             <br/>
                                            
                                             <ButtonGroup variant="contained" aria-label="outlined primary button group">
