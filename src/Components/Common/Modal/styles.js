@@ -4,8 +4,8 @@ export const modalStyles = {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        //width: 300,
-         width: 'calc((50% - 0.5px) * 1 + 0px)',// top: 0px; height: calc(300px);
+        width: 500,
+        //  width: 'calc((50% - 0.5px) * 1 + 0px)',// top: 0px; height: calc(300px);
         bgcolor: 'background.paper',
         boxShadow: 24,
         p: 4,

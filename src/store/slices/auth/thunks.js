@@ -3,12 +3,12 @@ import { registerUserWithPassword, singInWhithGoogle,singInWhithEmailPassword, l
 import { login, logout, chekingCredentials } from './authSlice'
 
 
-export const checkingAuthentication =(email,password) =>{
+export const checkingAuthentication =() =>{
 
     return async( dispatch ) =>{
 
         dispatch(chekingCredentials())
-        console.log(email,password)
+        
 
     }
 };
@@ -74,6 +74,12 @@ export const startCreatingUserWithEmailPassword =({email,password,displayName})=
     }
     
 };
+
+export const getUserRol= ()=>{
+
+    return 
+
+}
 
 export const startLogout= () =>{
 

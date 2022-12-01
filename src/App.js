@@ -125,6 +125,7 @@ const {status } = useSelector(state => state.auth);
 
                       <Route  path="*" isPrivate={true} element={ status === 'authenticated' ? <Navigate to="/home"/> : <Navigate to="/login"/>} />
                     </Route>
+                      <Route  path="/" element={ status === 'authenticated' ? <Navigate to="/home"/> : <Navigate to="/login"/>} />
                 </Routes>
 
 

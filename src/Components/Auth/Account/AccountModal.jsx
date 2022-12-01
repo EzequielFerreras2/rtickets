@@ -1,12 +1,12 @@
 import { Accordion, AccordionDetails, AccordionSummary, Avatar, Button, ButtonGroup, Grid, TextField, Typography } from '@mui/material';
-import { Box, Stack } from '@mui/system';
+import { Box} from '@mui/system';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import BasicModal from '../../Common/Modal/BasicModal';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 const AccountModal = ({open =false, onClose}) => {
 
-    const {uid,photoURL, email, displayName,providerId} = useSelector(store => store.auth)
+    const {photoURL, email, displayName,providerId} = useSelector(store => store.auth)
 
     const name= displayName?.charAt(0);
 

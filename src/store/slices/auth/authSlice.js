@@ -12,7 +12,7 @@ initialState: {
     photoURL: null,
     errorMessage: null,
     providerId:null,
-
+    rol:null
 
  },
   reducers: {
@@ -26,6 +26,7 @@ initialState: {
         state.photoURL= payload.photoURL;
         state.errorMessage= null;
         state.providerId=payload.providerId;
+        state.rol=payload.rol
     
 
     },
@@ -39,6 +40,8 @@ initialState: {
     state.displayName= null;
     state.photoURL= null;
     state.errorMessage= payload?.errorMessage;
+    state.rol=null;
+    state.providerId=null;
 
     },
 

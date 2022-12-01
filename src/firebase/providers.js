@@ -1,7 +1,11 @@
 import {createUserWithEmailAndPassword, GoogleAuthProvider,signInWithEmailAndPassword,signInWithPopup, updateProfile} from 'firebase/auth'
-import { FirebaseAuth } from './config';
+import { collection, doc, setDoc } from 'firebase/firestore/lite';
+import { FirebaseAuth, FirebaseDB } from './config';
+
+
 
 const googleProvider = new GoogleAuthProvider();
+
 
 export const singInWhithGoogle = async() =>{
 
@@ -11,7 +15,11 @@ export const singInWhithGoogle = async() =>{
         // const credentials = GoogleAuthProvider.credentialFromResult(result);
         const {displayName,email,photoURL,uid} = result.user;
         const {providerId}= result;
-       console.log(result)
+
+        const docuRef = doc(FirebaseDB,`usuarios/${uid}`);
+   
+       await setDoc(docuRef,{ photoURL: photoURL, email: email, displayName: displayName, providerId: providerId, roll:'user'})
+
         return{
             ok:true,
             displayName,email,photoURL,uid,providerId
@@ -66,8 +74,12 @@ export const registerUserWithPassword = async({email,password,displayName} )=>{
        const resp = await createUserWithEmailAndPassword(FirebaseAuth,email,password)
        const {uid,photoURL}= resp.user
        const {providerId}= resp;
-       await updateProfile(FirebaseAuth.currentUser,{ displayName})
 
+       await updateProfile(FirebaseAuth.currentUser,{ displayName})
+       
+       const docuRef = doc(FirebaseDB,`usuarios/${uid}`);
+   
+       await setDoc(docuRef,{ photoURL: photoURL, email: email, displayName: displayName, providerId: providerId, roll:'user'})
 
        return{
         ok:true,
