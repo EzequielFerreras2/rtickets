@@ -27,6 +27,7 @@ export const startGoogleSingIn =() =>{
         }
         else{
 
+            console.log('startlogigoogle')
             localStorage.setItem('user', JSON.stringify(results));
 
             dispatch(login(results))
@@ -56,6 +57,7 @@ export const startLogi =({email,password}) =>{
         }
         else{
 
+            console.log('startlogi')
             localStorage.setItem('user', JSON.stringify(results));
             dispatch(login(results))
         
@@ -76,6 +78,7 @@ export const startCreatingUserWithEmailPassword =({email,password,displayName})=
         dispatch(logout({errorMessage}))
       }
       else{
+        console.log('startcreatin')
         localStorage.setItem('user', JSON.stringify({uid,displayName,email,photoURL,providerId,rol}));
          dispatch(login({uid,displayName,email,photoURL,providerId,rol}))
         
@@ -85,11 +88,7 @@ export const startCreatingUserWithEmailPassword =({email,password,displayName})=
     
 };
 
-export const getUserRol= ()=>{
 
-    return 
-
-}
 
 export const startLogout= () =>{
 
