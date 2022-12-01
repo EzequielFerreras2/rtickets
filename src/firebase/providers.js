@@ -29,8 +29,6 @@ export const singInWhithGoogle = async() =>{
 
             console.log("Con data")
         }
-
-
        const userRol= getRol.data()
   
          
@@ -71,15 +69,14 @@ export const singInWhithGoogle = async() =>{
      const docuRef = doc(FirebaseDB,`usuarios/${uid}`);
      const getRol = await getDoc(docuRef);
 
-     const userrol= getRol.data()
+     const userRol= getRol.data()
   
-     console.log("Rol")
-     console.log( userrol)
+     
 
     
         return{
             ok:true,
-            uid,photoURL,displayName,providerId
+            uid,photoURL,displayName,providerId,rol:userRol?.rol
               }
     } 
     
@@ -103,19 +100,23 @@ export const registerUserWithPassword = async({email,password,displayName} )=>{
        await updateProfile(FirebaseAuth.currentUser,{ displayName})
        
        const docuRef = doc(FirebaseDB,`usuarios/${uid}`);
-   
-       await setDoc(docuRef,{ photoURL: photoURL, email: email, displayName: displayName, providerId: providerId, roll:'user'})
 
-       const getRol = await getDoc(docuRef);
+        const getRol = await getDoc(docuRef);
 
-       const userrol= getRol.data()
-  
-         console.log("Rol")
-         console.log( userrol)
+        if( getRol._document === null)
+        {
+            console.log("vacio")
+            await setDoc(docuRef,{ photoURL: photoURL, email: email, displayName: displayName, providerId: providerId, rol:"user"})
+        }
+        else{
+
+            console.log("Con data")
+        }
+       const userRol= getRol.data()
        
        return{
         ok:true,
-        uid,photoURL, email, displayName,providerId
+        uid,photoURL, email, displayName,providerId,rol:userRol?.rol
              }
 
 
