@@ -96,7 +96,7 @@ const {status,displayName,photoURL} = useSelector(store => store.auth)
 const [anchorEl, setAnchorEl] = React.useState(null);
 const dispatch = useDispatch();
 const name= displayName?.charAt(0);
-console.log(name)
+
 const [openAccountModal,setOpenAccountModal]=React.useState(false);
 
 

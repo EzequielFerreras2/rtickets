@@ -85,9 +85,10 @@ const {status } = useSelector(state => state.auth);
        }
        else{
 
-        const {uid,email, displayName, photoURL} =user
+        const {uid,email, displayName, photoURL,rol,providerId} =user
 
-        dispatch(login({uid,email, displayName, photoURL}))
+        dispatch(login({uid,email, displayName, photoURL,rol,providerId}))
+       
 
        }
 

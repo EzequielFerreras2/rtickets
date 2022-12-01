@@ -18,15 +18,20 @@ export const startGoogleSingIn =() =>{
 
         dispatch(chekingCredentials());
         const results = await singInWhithGoogle();
-        console.log(results)
         
         if(!results.ok)
         {
             dispatch(logout( results.errorMessage ));
+
+            localStorage.removeItem('user')
         }
         else{
 
+            localStorage.setItem('user', JSON.stringify(results));
+
             dispatch(login(results))
+            
+        
 
         }
 
@@ -41,16 +46,19 @@ export const startLogi =({email,password}) =>{
         dispatch(chekingCredentials());
 
         const results =await singInWhithEmailPassword({email,password})
-        console.log(results)
+        
 
         if(!results.ok)
         {
+            localStorage.removeItem('user')
             dispatch(logout( results ));
-            console.log(results) 
+             
         }
         else{
 
+            localStorage.setItem('user', JSON.stringify(results));
             dispatch(login(results))
+        
         }
     }
 
@@ -60,15 +68,17 @@ export const startCreatingUserWithEmailPassword =({email,password,displayName})=
     return async(dispatch)=>{
 
       dispatch(chekingCredentials());
-      const {ok,uid,photoURL,errorMessage,providerId} = await registerUserWithPassword({email,password,displayName});
-        console.log(ok,uid,photoURL,errorMessage,providerId)
+      const {ok,uid,photoURL,errorMessage,providerId,rol} = await registerUserWithPassword({email,password,displayName});
+        
 
       if(!ok){
+        localStorage.removeItem('user')
         dispatch(logout({errorMessage}))
       }
       else{
-         dispatch(login({uid,displayName,email,photoURL,providerId}))
-         
+        localStorage.setItem('user', JSON.stringify({uid,displayName,email,photoURL,providerId,rol}));
+         dispatch(login({uid,displayName,email,photoURL,providerId,rol}))
+        
       }
         
     }
@@ -86,6 +96,7 @@ export const startLogout= () =>{
     return async(dispatch) =>{
 
       await logoutFirebase();
+      localStorage.removeItem('user')
         dispatch(logout({}));
     }
 
