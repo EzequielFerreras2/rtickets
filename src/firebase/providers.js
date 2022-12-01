@@ -1,5 +1,5 @@
 import {createUserWithEmailAndPassword, GoogleAuthProvider,signInWithEmailAndPassword,signInWithPopup, updateProfile} from 'firebase/auth'
-import { collection, doc, setDoc } from 'firebase/firestore/lite';
+import {  doc, setDoc } from 'firebase/firestore/lite';
 import { FirebaseAuth, FirebaseDB } from './config';
 
 
@@ -51,7 +51,7 @@ export const singInWhithGoogle = async() =>{
         const result= await signInWithEmailAndPassword(FirebaseAuth, email,password);
         const {uid,photoURL,displayName}=result.user;
         const {providerId}= result;
-        console.log(result)
+    
         return{
             ok:true,
             uid,photoURL,displayName,providerId
