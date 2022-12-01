@@ -1,5 +1,5 @@
 import {createUserWithEmailAndPassword, GoogleAuthProvider,signInWithEmailAndPassword,signInWithPopup, updateProfile} from 'firebase/auth'
-import {  doc, setDoc } from 'firebase/firestore/lite';
+import {  doc, getDoc, setDoc } from 'firebase/firestore/lite';
 import { FirebaseAuth, FirebaseDB } from './config';
 
 
@@ -17,12 +17,27 @@ export const singInWhithGoogle = async() =>{
         const {providerId}= result;
 
         const docuRef = doc(FirebaseDB,`usuarios/${uid}`);
-   
-       await setDoc(docuRef,{ photoURL: photoURL, email: email, displayName: displayName, providerId: providerId, roll:'user'})
+
+        const getRol = await getDoc(docuRef);
+
+        if( getRol._document === null)
+        {
+            console.log("vacio")
+            await setDoc(docuRef,{ photoURL: photoURL, email: email, displayName: displayName, providerId: providerId, rol:"user"})
+        }
+        else{
+
+            console.log("Con data")
+        }
+
+
+       const userRol= getRol.data()
+  
+         
 
         return{
             ok:true,
-            displayName,email,photoURL,uid,providerId
+            displayName,email,photoURL,uid,providerId,rol:userRol?.rol
               }
     }
     catch(error)
@@ -51,6 +66,16 @@ export const singInWhithGoogle = async() =>{
         const result= await signInWithEmailAndPassword(FirebaseAuth, email,password);
         const {uid,photoURL,displayName}=result.user;
         const {providerId}= result;
+
+
+     const docuRef = doc(FirebaseDB,`usuarios/${uid}`);
+     const getRol = await getDoc(docuRef);
+
+     const userrol= getRol.data()
+  
+     console.log("Rol")
+     console.log( userrol)
+
     
         return{
             ok:true,
@@ -81,6 +106,13 @@ export const registerUserWithPassword = async({email,password,displayName} )=>{
    
        await setDoc(docuRef,{ photoURL: photoURL, email: email, displayName: displayName, providerId: providerId, roll:'user'})
 
+       const getRol = await getDoc(docuRef);
+
+       const userrol= getRol.data()
+  
+         console.log("Rol")
+         console.log( userrol)
+       
        return{
         ok:true,
         uid,photoURL, email, displayName,providerId
