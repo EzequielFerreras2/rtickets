@@ -119,7 +119,7 @@ const {status } = useSelector(state => state.auth);
 
                       <Route element={<PublicRoute/>}>
                         <Route path="/login" isPrivate={false} element={<Login setNavbar={() =>updateNavbar()}/>}/>
-                        <Route path="/register" element={<Register/>}/>
+                        <Route path="/login/register" element={<Register/>}/>
                         
                       </Route>
                          
@@ -135,6 +135,8 @@ const {status } = useSelector(state => state.auth);
                       <Route  path="*" isPrivate={true} element={ status === 'authenticated' ? <Navigate to="/home"/> : <Navigate to="/login"/>} />
                     </Route>
                       <Route  path="/" element={ status === 'authenticated' ? <Navigate to="/home"/> : <Navigate to="/login"/>} />
+                      
+                     
                 </Routes>
 
 
