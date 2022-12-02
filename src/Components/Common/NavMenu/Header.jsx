@@ -19,6 +19,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import {startLogout} from '../../../store/slices/auth/thunks'
 import { Avatar, Button } from '@mui/material';
 import AccountModal from '../../Auth/Account/AccountModal';
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -92,13 +94,13 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const Header = () => {
 const theme = useTheme();
 const [open, setOpen] = React.useState(false);
-const {status,displayName,photoURL} = useSelector(store => store.auth)
+const {status,displayName,photoURL,rol} = useSelector(store => store.auth)
 const [anchorEl, setAnchorEl] = React.useState(null);
 const dispatch = useDispatch();
 const name= displayName?.charAt(0);
-
+const navigate = useNavigate();
 const [openAccountModal,setOpenAccountModal]=React.useState(false);
-
+const toAccount =()=>{navigate('account') }
 
   
   const openMenu = (event) => {
@@ -114,6 +116,7 @@ const [openAccountModal,setOpenAccountModal]=React.useState(false);
     handleClose();
 
   }
+  
 
   const handleLogout = () =>{
     
@@ -199,6 +202,16 @@ const [openAccountModal,setOpenAccountModal]=React.useState(false);
                   >
             
                     <MenuItem onClick={()=>handleAccount()} style={{ textDecoration: 'none' , color: 'black'}}><AccountBoxIcon/> Mi Cuenta</MenuItem>
+                    
+                    {
+                      rol==='admin'?
+                        <>
+                       <MenuItem  onClick={()=>toAccount()} style={{ textDecoration: 'none' , color: 'black'}}><SupervisorAccountIcon/> Administrar Cuentas</MenuItem>
+                       
+                       </>
+                      :<></>
+                    }
+                    
                     <MenuItem onClick={handleLogout} style={{ textDecoration: 'none' , color: 'black'}} ><LogoutIcon/> Logout</MenuItem>
                     
                   </Menu>

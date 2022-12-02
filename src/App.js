@@ -18,6 +18,7 @@ import AdminDashboard from "./Components/DashBoard/AdminDashBoard/AdminDashboard
 import UserDashBoard from "./Components/DashBoard/UserDashBoard/UserDashBoard";
 import Register from "./Components/Auth/Register/Register"
 import Account from "./Components/Auth/Account/Account";
+import Dashboard from "./Components/DashBoard/Dashboard";
 
 
 
@@ -111,8 +112,9 @@ const {status } = useSelector(state => state.auth);
           <DisplayHeader isLoggedIn={isNavbarHidden}/>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
               <AuthProvider>
-
+              <br/>
                 <Routes> 
+                  
                     <Route path="/" element={<Layout/>}>
 
                       <Route element={<PublicRoute/>}>
@@ -125,6 +127,7 @@ const {status } = useSelector(state => state.auth);
                         <Route path="/home" element={<Home setNavbar={() =>updateNavbar()}/>}/>
                         <Route path="/admindashboard" element={<AdminDashboard />}/>
                         <Route path="/userdashboard" element={<UserDashBoard />}/>
+                        <Route path="/dashboard" element={<Dashboard/>}/>
                         <Route path="/account" element={<Account/>}/>
                        
                       </Route>

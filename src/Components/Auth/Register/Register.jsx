@@ -53,7 +53,7 @@ export default function SignUp() {
 
   const onClickRegister =()=>{
 
-    navegate('auth/login')
+    navegate('login')
 
   }
 
@@ -175,7 +175,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link onClick={()=> onClickRegister()} variant="body2">
+                <Link to='login' variant="body2">
                   Ya tienes Cuenta? Sign in
                 </Link>
               </Grid>

@@ -57,7 +57,6 @@ export const startLogi =({email,password}) =>{
         }
         else{
 
-            console.log('startlogi')
             localStorage.setItem('user', JSON.stringify(results));
             dispatch(login(results))
         

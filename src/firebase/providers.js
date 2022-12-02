@@ -22,12 +22,12 @@ export const singInWhithGoogle = async() =>{
 
         if( getRol._document === null)
         {
-            console.log("vacio")
+            console.log("Rol de usuario asignado")
             await setDoc(docuRef,{ photoURL: photoURL, email: email, displayName: displayName, providerId: providerId, rol:"user"})
         }
         else{
 
-            console.log("Con data")
+            console.log("Usuario con Rol asignado")
         }
 
        const userRol= getRol.data()
@@ -67,11 +67,21 @@ export const singInWhithGoogle = async() =>{
         const {providerId}= result;
 
 
-     const docuRef = doc(FirebaseDB,`usuarios/${uid}`);
-     const getRol = await getDoc(docuRef);
+        const docuRef = doc(FirebaseDB,`usuarios/${uid}`);
 
-     const userRol= getRol.data()
-  
+        const getRol = await getDoc(docuRef);
+
+        if( getRol._document === null)
+        {
+            console.log("vacio")
+            await setDoc(docuRef,{ photoURL: photoURL, email: email, displayName: displayName, providerId: providerId, rol:"user"})
+        }
+        else{
+
+            console.log("Con data")
+        }
+
+       const userRol= getRol.data()
    
 
     

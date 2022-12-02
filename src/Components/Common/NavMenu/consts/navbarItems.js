@@ -9,12 +9,17 @@ import AltRouteIcon from '@mui/icons-material/AltRoute';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 
 
+
+
+
+
+
 export const mainSideBarItems =  [
     {
         id:0,
         icon:<DashboardIcon/>,
-        label:'Home',
-        route:'Home',
+        label:'Dashboard',
+        route:'Dashboard',
         hidden:false
     },
     {
