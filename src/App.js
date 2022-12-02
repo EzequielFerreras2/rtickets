@@ -80,12 +80,17 @@ const {status } = useSelector(state => state.auth);
       onAuthStateChanged(FirebaseAuth, async(user) => {
 
        if(!user){
+
+
+        localStorage.removeItem('user')
         return dispatch(logout())
 
        }
        else{
 
-        const {uid,email, displayName, photoURL,rol,providerId} =user
+        const storeUser = JSON.parse(localStorage.getItem('user'))
+
+        const {uid,email, displayName, photoURL,rol,providerId} =storeUser
 
         dispatch(login({uid,email, displayName, photoURL,rol,providerId}))
        
