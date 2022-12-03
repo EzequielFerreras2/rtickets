@@ -7,7 +7,7 @@ const PublicRoute = (updateNavbar) => {
     const {status} =useSelector(store => store.auth)
 
        // not-authenticated //checking //authenticated
-    return (status === 'checking' || status === 'not-authenticated'  ? <Outlet/> : <Navigate to="/home"/>)   ;
+    return ( status === 'not-authenticated'  ? <Outlet/> : <Navigate to="/home"/>)   ;
 
     // return(
 
