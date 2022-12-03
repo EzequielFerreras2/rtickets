@@ -141,6 +141,7 @@ const {status } = useSelector(state => state.auth);
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
               <AuthProvider>
               <br/>
+              <br/>
                 <Routes> 
                   
                     <Route path="/" element={<Layout/>}>

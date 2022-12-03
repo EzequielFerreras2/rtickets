@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import React  from 'react';
 import { useSelector } from 'react-redux';
 
@@ -9,10 +10,13 @@ const Account = () => {
     
     return (
         <>
-        <p>{user.displayName}</p>
-        <p>{user.displayName}</p>
-        <p>{user.displayName}</p>
-        <p>{user.displayName}</p>
+        
+        <Box>
+            <p>{user.displayName}</p>
+            <p>{user.displayName}</p>
+            <p>{user.displayName}</p>
+            <p>{user.displayName}</p>
+        </Box>
 
         </>
     );
