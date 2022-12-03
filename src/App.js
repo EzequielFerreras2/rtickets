@@ -82,7 +82,7 @@ const {status } = useSelector(state => state.auth);
 
        if(!user){
 
-
+        console.log(user)
         localStorage.removeItem('user')
         return dispatch(logout())
 
@@ -102,7 +102,7 @@ const {status } = useSelector(state => state.auth);
 
     
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [status]);
 
 
   return (
