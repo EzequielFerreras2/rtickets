@@ -54,8 +54,63 @@ const {status } = useSelector(state => state.auth);
   }
   }
 
+  useEffect(() => {
+
+    onAuthStateChanged(FirebaseAuth, async(user) => {
+
+     if(!user){
+
+      
+      localStorage.removeItem('user')
+      return   dispatch(logout())
+
+     }
+     else{
+
+      if(user.providerId ==='firebase')
+
+      {
+        localStorage.setItem('user',JSON.stringify(user))
+        
+        const storeUser = JSON.parse(localStorage.getItem('user'))
+
+        const {uid,email, displayName, photoURL,rol,providerId} =storeUser
+  
+        dispatch(login({uid,email, displayName, photoURL,rol,providerId}))
+
+      }
+
+      else{
+
+        const storeUser = JSON.parse(localStorage.getItem('user'))
+
+        const {uid,email, displayName, photoURL,rol,providerId} =storeUser
+  
+        dispatch(login({uid,email, displayName, photoURL,rol,providerId}))
+      }
+
+     
+      
+
+     }
+
+    });
+
+  
+
+}, []);
+
 
  useEffect(() => {
+
+
+  onAuthStateChanged(FirebaseAuth, async(user) => {
+
+    console.log(user)
+   
+   });
+
+ 
 
   if( status === 'checking')
   {
@@ -76,34 +131,7 @@ const {status } = useSelector(state => state.auth);
   
  }, [status]);
 
-  useEffect(() => {
-
-      onAuthStateChanged(FirebaseAuth, async(user) => {
-
-       if(!user){
-
-
-        localStorage.removeItem('user')
-        return dispatch(logout())
-
-       }
-       else{
-
-        const storeUser = JSON.parse(localStorage.getItem('user'))
-
-        const {uid,email, displayName, photoURL,rol,providerId} =storeUser
-
-        dispatch(login({uid,email, displayName, photoURL,rol,providerId}))
-       
-
-       }
-
-      });
-
-    
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+  
 
   return (
 
@@ -112,6 +140,7 @@ const {status } = useSelector(state => state.auth);
           <DisplayHeader isLoggedIn={isNavbarHidden}/>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
               <AuthProvider>
+              <br/>
               <br/>
                 <Routes> 
                   
