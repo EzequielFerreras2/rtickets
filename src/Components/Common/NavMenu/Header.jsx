@@ -100,7 +100,7 @@ const dispatch = useDispatch();
 const name= displayName?.charAt(0);
 const navigate = useNavigate();
 const [openAccountModal,setOpenAccountModal]=React.useState(false);
-const toAccount =()=>{navigate('account') }
+const toAccount =()=>{ navigate('account'); handleClose(); }
 
   
   const openMenu = (event) => {

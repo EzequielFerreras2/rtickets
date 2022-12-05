@@ -9,6 +9,8 @@ const Account = () => {
     
     return (
         <>
+        <br/>
+
         <p>{user.displayName}</p>
         <p>{user.displayName}</p>
         <p>{user.displayName}</p>
