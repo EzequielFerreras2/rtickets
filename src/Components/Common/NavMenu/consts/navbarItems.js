@@ -7,7 +7,7 @@ import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import AltRouteIcon from '@mui/icons-material/AltRoute';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-
+import DescriptionIcon from '@mui/icons-material/Description';
 
 
 
@@ -24,10 +24,10 @@ export const mainSideBarItems =  [
     },
     {
         id:1,
-        icon:<PeopleIcon/>,
-        label:'Cliente',
-        route:'Cliente',
-        hidden:true
+        icon:<DescriptionIcon/>,
+        label:'Casos',
+        route:'Cases',
+        hidden:false
     },
     {
         id:2,
@@ -62,13 +62,13 @@ export const mainSideBarItems =  [
         icon:<AccountBalanceWalletIcon/>,
         label:'Nomina',
         route:'Payroll',
-        hidden:false
+        hidden:true
     },
     {
         id:7,
         icon:<PeopleIcon/>,
         label:'Empleados',
         route:'Employees',
-        hidden:false
+        hidden:true
     },
 ]

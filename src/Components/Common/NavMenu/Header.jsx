@@ -204,12 +204,13 @@ const toAccount =()=>{ navigate('account'); handleClose(); }
                     <MenuItem onClick={()=>handleAccount()} style={{ textDecoration: 'none' , color: 'black'}}><AccountBoxIcon/> Mi Cuenta</MenuItem>
                     
                     {
-                      rol==='admin'?
-                        <>
+                      rol==='admin'
+                      ?
+                       <div>
                        <MenuItem  onClick={()=>toAccount()} style={{ textDecoration: 'none' , color: 'black'}}><SupervisorAccountIcon/> Administrar Cuentas</MenuItem>
-                       
-                       </>
-                      :<></>
+                       </div>
+                      :
+                       <div></div>
                     }
                     
                     <MenuItem onClick={handleLogout} style={{ textDecoration: 'none' , color: 'black'}} ><LogoutIcon/> Logout</MenuItem>

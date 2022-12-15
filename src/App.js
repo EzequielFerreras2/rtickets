@@ -19,6 +19,7 @@ import UserDashBoard from "./Components/DashBoard/UserDashBoard/UserDashBoard";
 import Register from "./Components/Auth/Register/Register"
 import Account from "./Components/Auth/Account/Account";
 import Dashboard from "./Components/DashBoard/Dashboard";
+import Cases from "./Components/Cases/Cases";
 
 
 
@@ -35,7 +36,7 @@ const {status } = useSelector(state => state.auth);
         <Header/>
       )   
     }
-  }
+  };
 
   useEffect(() => {
 
@@ -98,18 +99,11 @@ const {status } = useSelector(state => state.auth);
 
   
 
-}, []);
+}, [dispatch, status]);
 
 
  useEffect(() => {
-
-
-  onAuthStateChanged(FirebaseAuth, async(user) => {
-
-    console.log(user)
-   
-   });
-
+ 
  
 
   if( status === 'checking')
@@ -158,6 +152,7 @@ const {status } = useSelector(state => state.auth);
                         <Route path="/userdashboard" element={<UserDashBoard />}/>
                         <Route path="/dashboard" element={<Dashboard/>}/>
                         <Route path="/account" element={<Account/>}/>
+                        <Route path="/cases" element={<Cases/>}/>
                        
                       </Route>
 

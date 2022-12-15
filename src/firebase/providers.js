@@ -20,6 +20,8 @@ export const singInWhithGoogle = async() =>{
 
         const getRol = await getDoc(docuRef);
 
+        console.log(getRol)
+
         if( getRol._document === null)
         {
             console.log("Rol de usuario asignado")
