@@ -32,6 +32,7 @@ function Copyright(props) {
   );
 }
 
+
 const theme = createTheme();
 
 export default function SignUp() {
